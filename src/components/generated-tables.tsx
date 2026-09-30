@@ -1,12 +1,18 @@
 import defaultMdxComponents from "fumadocs-ui/mdx";
 
 const Table = defaultMdxComponents.table;
-import { workerEnvVars, dashboardEnvVars, observabilityEnvVars, composeEnvVars } from "@/generated/env-vars";
-import { commandGroups, commandCount } from "@/generated/commands";
-import { permitNodeGroups, permitNodeCount } from "@/generated/permits";
-import { rpcActionCount, rpcSliceGroups } from "@/generated/rpc-actions";
-import { dataPrivacyRows } from "@/generated/data-privacy";
-import { sdkImportGroups, sdkExportCount } from "@/generated/sdk-reference";
+import envVarsData from "../../data/env-vars.json";
+import commandsData from "../../data/commands.json";
+import permitsData from "../../data/permits.json";
+import rpcData from "../../data/rpc-actions.json";
+import dataPrivacyRows from "../../data/data-privacy.json";
+import sdkData from "../../data/sdk-reference.json";
+
+const { workerEnvVars, dashboardEnvVars, observabilityEnvVars, composeEnvVars } = envVarsData;
+const { commandGroups, commandCount } = commandsData;
+const { permitNodeGroups, permitNodeCount } = permitsData;
+const { rpcActionCount, rpcSliceGroups } = rpcData;
+const { sdkImportGroups, sdkExportCount } = sdkData;
 
 function EnvRows({ rows }: { rows: { name: string; required: string; fallback: string; about: string }[] }) {
   return (

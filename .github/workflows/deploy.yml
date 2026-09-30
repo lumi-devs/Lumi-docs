@@ -1,0 +1,87 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+  repository_dispatch:
+    types: [lumi-docs-sync]
+  schedule:
+    - cron: "17 4 * * *"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+env:
+  BASE_PATH: /Lumi-docs
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Lumi-docs
+        uses: actions/checkout@v7
+        with:
+          path: site
+
+      - name: Checkout lumi-devs/Lumi
+        uses: actions/checkout@v7
+        with:
+          repository: lumi-devs/Lumi
+          path: lumi
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Cache Bun dependencies (lumi)
+        uses: actions/cache@v6
+        with:
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-lumi-${{ hashFiles('lumi/bun.lock') }}
+          restore-keys: ${{ runner.os }}-bun-lumi-
+
+      - name: Install lumi dependencies
+        working-directory: lumi
+        run: bun install --frozen-lockfile
+
+      - name: Sync docs content and generated data into the site
+        working-directory: lumi
+        run: bash scripts/docs/sync.sh "$GITHUB_WORKSPACE/site"
+
+      - name: Cache Bun dependencies (site)
+        uses: actions/cache@v6
+        with:
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-site-${{ hashFiles('site/bun.lock') }}
+          restore-keys: ${{ runner.os }}-bun-site-
+
+      - name: Install site dependencies
+        working-directory: site
+        run: bun install
+
+      - name: Build site
+        working-directory: site
+        run: bun run build
+
+      - uses: actions/configure-pages@v6
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

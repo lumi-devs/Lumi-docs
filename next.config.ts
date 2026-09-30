@@ -1,16 +1,15 @@
 import type { NextConfig } from "next";
 import { createMDX } from "fumadocs-mdx/next";
 
-const isCI = process.env.CI || process.env.GITHUB_ACTIONS;
+const basePath = process.env.BASE_PATH || "";
 
 const nextConfig: NextConfig = {
   output: "export",
   distDir: "dist",
-  basePath: process.env.BASE_PATH || (isCI ? "/Lumi" : ""),
-  assetPrefix: process.env.BASE_PATH || (isCI ? "/Lumi" : ""),
+  basePath,
+  assetPrefix: basePath,
   trailingSlash: true,
   reactStrictMode: true,
-  agentRules: true,
   images: {
     unoptimized: true,
   },
@@ -19,5 +18,3 @@ const nextConfig: NextConfig = {
 const withMDX = createMDX();
 
 export default withMDX(nextConfig);
-
-

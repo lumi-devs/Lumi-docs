@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { commandGroups } from "../../generated/commands";
-import { modules } from "../../generated/modules";
+import { commandGroups } from "../../../data/commands.json";
+import modules from "../../../data/modules.json";
 
 export const dynamic = "force-static";
 
