@@ -16,7 +16,8 @@ are build inputs pulled from the main repo, not committed here (see `.gitignore`
 2. Its `scripts/docs/sync.sh` copies `docs/site/content` and `docs/site/public` into this
    repo's `content/` and `public/synced/`, and runs `bun run docs:export` to write the
    generated reference JSON (modules, commands, permits, RPC actions, env vars, data-privacy
-   statements, addon SDK reference) into `data/`.
+   statements, addon SDK reference) into `data/`, plus `data/build-info.json` (the Lumi commit,
+   its date and the latest `v*` release tag), which drives the "these docs track `main`" banner.
 3. This repo's own `bun install` + `bun run build` (Next.js `output: "export"`) then produces
    the static site in `dist/`.
 

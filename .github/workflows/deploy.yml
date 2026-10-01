@@ -35,6 +35,8 @@ jobs:
         with:
           repository: lumi-devs/Lumi
           path: lumi
+          # Full history and tags, so sync.sh can name the latest release for the version banner.
+          fetch-depth: 0
 
       - uses: oven-sh/setup-bun@v2
         with:
