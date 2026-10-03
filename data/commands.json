@@ -1,0 +1,508 @@
+{
+  "commandGroups": [
+    {
+      "module": "afk",
+      "displayName": "AFK",
+      "emoji": "💤",
+      "commands": [
+        {
+          "module": "afk",
+          "name": "afk",
+          "description": "Set yourself AFK with an optional reason.",
+          "requiredPermit": null,
+          "subcommands": []
+        },
+        {
+          "module": "afk",
+          "name": "afkclean",
+          "description": "Remove AFK entries whose users are no longer cached (owner only).",
+          "requiredPermit": "owner.*",
+          "subcommands": []
+        },
+        {
+          "module": "afk",
+          "name": "afklist",
+          "description": "List users currently AFK in this server (owner only).",
+          "requiredPermit": "owner.*",
+          "subcommands": []
+        },
+        {
+          "module": "afk",
+          "name": "afkstats",
+          "description": "Show AFK system stats (owner only).",
+          "requiredPermit": "owner.*",
+          "subcommands": []
+        }
+      ]
+    },
+    {
+      "module": "core",
+      "displayName": "Core",
+      "emoji": "🛡️",
+      "commands": [
+        {
+          "module": "core",
+          "name": "about",
+          "description": "Display detailed information, statistics, and architecture of the Lumi bot.",
+          "requiredPermit": null,
+          "subcommands": []
+        },
+        {
+          "module": "core",
+          "name": "announce",
+          "description": "Broadcast a message to every server (Bot Owner Only)",
+          "requiredPermit": null,
+          "subcommands": []
+        },
+        {
+          "module": "core",
+          "name": "download",
+          "description": "Install or uninstall a module from a repository (Bot Owner Only)",
+          "requiredPermit": null,
+          "subcommands": [
+            "panel",
+            "install",
+            "uninstall",
+            "rollback"
+          ]
+        },
+        {
+          "module": "core",
+          "name": "help",
+          "description": "Display all available commands with dynamic pagination.",
+          "requiredPermit": null,
+          "subcommands": []
+        },
+        {
+          "module": "core",
+          "name": "lumi",
+          "description": "Open the Lumi control panel or update Lumi core",
+          "requiredPermit": "admin.*",
+          "subcommands": [
+            "update",
+            "panel"
+          ]
+        },
+        {
+          "module": "core",
+          "name": "module",
+          "description": "Manage system and third-party modules",
+          "requiredPermit": null,
+          "subcommands": [
+            "list",
+            "info",
+            "enable",
+            "disable",
+            "install",
+            "uninstall",
+            "reload",
+            "update",
+            "pin",
+            "unpin",
+            "help"
+          ]
+        },
+        {
+          "module": "core",
+          "name": "mydata",
+          "description": "View and manage end-user data, privacy disclosures, and GDPR actions",
+          "requiredPermit": null,
+          "subcommands": [
+            "whatdata",
+            "3rdparty",
+            "getmydata",
+            "forgetme"
+          ]
+        },
+        {
+          "module": "core",
+          "name": "ping",
+          "description": "Check the bot status, latency, and system health.",
+          "requiredPermit": null,
+          "subcommands": []
+        },
+        {
+          "module": "core",
+          "name": "repo",
+          "description": "Manage third-party module repositories",
+          "requiredPermit": null,
+          "subcommands": [
+            "add",
+            "remove",
+            "update",
+            "list",
+            "modules",
+            "help"
+          ]
+        },
+        {
+          "module": "core",
+          "name": "serverlock",
+          "description": "Lock the bot to its current servers (Bot Owner Only)",
+          "requiredPermit": null,
+          "subcommands": [
+            "on",
+            "off",
+            "status"
+          ]
+        },
+        {
+          "module": "core",
+          "name": "setup",
+          "description": "Launch the ephemeral server setup wizard.",
+          "requiredPermit": null,
+          "subcommands": []
+        },
+        {
+          "module": "core",
+          "name": "sv",
+          "description": "Bot owner server management",
+          "requiredPermit": null,
+          "subcommands": [
+            "leave"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "economy",
+      "displayName": "Economy",
+      "emoji": "🪙",
+      "commands": [
+        {
+          "module": "economy",
+          "name": "balance",
+          "description": "Show wallet and bank balances.",
+          "requiredPermit": null,
+          "subcommands": []
+        },
+        {
+          "module": "economy",
+          "name": "bank",
+          "description": "Move currency between wallet and bank; staff can adjust balances.",
+          "requiredPermit": null,
+          "subcommands": [
+            "deposit",
+            "withdraw",
+            "set",
+            "add",
+            "remove"
+          ]
+        },
+        {
+          "module": "economy",
+          "name": "leaderboard",
+          "description": "Show the richest members on this server.",
+          "requiredPermit": null,
+          "subcommands": []
+        },
+        {
+          "module": "economy",
+          "name": "pay",
+          "description": "Transfer currency to another member. A tax may apply.",
+          "requiredPermit": null,
+          "subcommands": []
+        },
+        {
+          "module": "economy",
+          "name": "payday",
+          "description": "Claim free currency. Cooldown applies between claims.",
+          "requiredPermit": null,
+          "subcommands": []
+        },
+        {
+          "module": "economy",
+          "name": "slots",
+          "description": "Bet wallet currency on the slot machine.",
+          "requiredPermit": null,
+          "subcommands": []
+        }
+      ]
+    },
+    {
+      "module": "mod",
+      "displayName": "Moderation",
+      "emoji": "🛡️",
+      "commands": [
+        {
+          "module": "mod",
+          "name": "ban",
+          "description": "Ban or unban a user",
+          "requiredPermit": "mod.*",
+          "subcommands": [
+            "add",
+            "remove"
+          ]
+        },
+        {
+          "module": "mod",
+          "name": "cases",
+          "description": "View or modify moderation cases",
+          "requiredPermit": "mod.*",
+          "subcommands": [
+            "view",
+            "modify",
+            "delete"
+          ]
+        },
+        {
+          "module": "mod",
+          "name": "dm",
+          "description": "Relay a direct message through the bot to a user",
+          "requiredPermit": "mod.dm",
+          "subcommands": []
+        },
+        {
+          "module": "mod",
+          "name": "kick",
+          "description": "Kick a member from the server",
+          "requiredPermit": "mod.*",
+          "subcommands": []
+        },
+        {
+          "module": "mod",
+          "name": "lock",
+          "description": "Lock or unlock one channel, unlike /lockdown which covers the whole server",
+          "requiredPermit": "mod.lockdown",
+          "subcommands": [
+            "enable",
+            "disable"
+          ]
+        },
+        {
+          "module": "mod",
+          "name": "lockdown",
+          "description": "Enable or disable server lockdown",
+          "requiredPermit": "mod.lockdown",
+          "subcommands": [
+            "enable",
+            "disable"
+          ]
+        },
+        {
+          "module": "mod",
+          "name": "notes",
+          "description": "Add a staff-only note to a member",
+          "requiredPermit": "mod.notes",
+          "subcommands": []
+        },
+        {
+          "module": "mod",
+          "name": "quarantine",
+          "description": "Quarantine or release a member",
+          "requiredPermit": "mod.*",
+          "subcommands": [
+            "add",
+            "remove"
+          ]
+        },
+        {
+          "module": "mod",
+          "name": "sanitize",
+          "description": "Remove hoisting characters from a member's nickname",
+          "requiredPermit": "mod.*",
+          "subcommands": []
+        },
+        {
+          "module": "mod",
+          "name": "say",
+          "description": "Relay a message through the bot into a channel",
+          "requiredPermit": "mod.say",
+          "subcommands": []
+        },
+        {
+          "module": "mod",
+          "name": "softban",
+          "description": "Softban a member (ban and immediately unban to clear recent messages)",
+          "requiredPermit": "mod.softBan",
+          "subcommands": []
+        },
+        {
+          "module": "mod",
+          "name": "timeout",
+          "description": "Timeout or untimeout a member",
+          "requiredPermit": "mod.*",
+          "subcommands": [
+            "add",
+            "remove"
+          ]
+        },
+        {
+          "module": "mod",
+          "name": "unban",
+          "description": "Unban a user from the server",
+          "requiredPermit": "mod.*",
+          "subcommands": []
+        },
+        {
+          "module": "mod",
+          "name": "unquarantine",
+          "description": "Release a member from Anti-Nuke Quarantine",
+          "requiredPermit": "mod.*",
+          "subcommands": []
+        },
+        {
+          "module": "mod",
+          "name": "untimeout",
+          "description": "Remove timeout/unmute a member in the server",
+          "requiredPermit": "mod.*",
+          "subcommands": []
+        },
+        {
+          "module": "mod",
+          "name": "vcmute",
+          "description": "Voice mute a member in server voice channels",
+          "requiredPermit": "mod.voiceMute",
+          "subcommands": [
+            "add",
+            "remove"
+          ]
+        },
+        {
+          "module": "mod",
+          "name": "vcunmute",
+          "description": "Unmute a member in server voice channels",
+          "requiredPermit": "mod.voiceMute",
+          "subcommands": []
+        },
+        {
+          "module": "mod",
+          "name": "warn",
+          "description": "Warn a member",
+          "requiredPermit": "mod.*",
+          "subcommands": []
+        }
+      ]
+    },
+    {
+      "module": "reactionroles",
+      "displayName": "Reaction Roles",
+      "emoji": "🎭",
+      "commands": [
+        {
+          "module": "reactionroles",
+          "name": "reactionroles",
+          "description": "Post a role menu card in a channel.",
+          "requiredPermit": "reactionroles.manage",
+          "subcommands": []
+        }
+      ]
+    },
+    {
+      "module": "security",
+      "displayName": "Security",
+      "emoji": "🛡️",
+      "commands": [
+        {
+          "module": "security",
+          "name": "panic",
+          "description": "Lock down the server: pause invites and mute @everyone in text channels.",
+          "requiredPermit": "admin.*",
+          "subcommands": []
+        },
+        {
+          "module": "security",
+          "name": "restore",
+          "description": "Restore server structure from a role/channel backup",
+          "requiredPermit": "admin.*",
+          "subcommands": [
+            "list",
+            "latest"
+          ]
+        },
+        {
+          "module": "security",
+          "name": "verifypanel",
+          "description": "Post the member verification panel in a channel.",
+          "requiredPermit": "admin.*",
+          "subcommands": []
+        }
+      ]
+    },
+    {
+      "module": "tempvc",
+      "displayName": "Temp Voice Channels",
+      "emoji": "🔊",
+      "commands": [
+        {
+          "module": "tempvc",
+          "name": "tempvc",
+          "description": "Open the control panel for your current temp VC.",
+          "requiredPermit": null,
+          "subcommands": []
+        }
+      ]
+    },
+    {
+      "module": "utility",
+      "displayName": "Utility",
+      "emoji": "⚙️",
+      "commands": [
+        {
+          "module": "utility",
+          "name": "avatar",
+          "description": "Displays a user's avatar.",
+          "requiredPermit": null,
+          "subcommands": []
+        },
+        {
+          "module": "utility",
+          "name": "banner",
+          "description": "Displays a user's banner.",
+          "requiredPermit": null,
+          "subcommands": []
+        },
+        {
+          "module": "utility",
+          "name": "nick",
+          "description": "Change a member's nickname.",
+          "requiredPermit": null,
+          "subcommands": []
+        },
+        {
+          "module": "utility",
+          "name": "purge",
+          "description": "Bulk delete messages in this channel, with optional filters.",
+          "requiredPermit": "mod.*",
+          "subcommands": [
+            "messages",
+            "user",
+            "bots",
+            "links",
+            "regex",
+            "duration"
+          ]
+        },
+        {
+          "module": "utility",
+          "name": "serverinfo",
+          "description": "Displays detailed information about this server.",
+          "requiredPermit": null,
+          "subcommands": []
+        },
+        {
+          "module": "utility",
+          "name": "whois",
+          "description": "Displays information about a user or guild member.",
+          "requiredPermit": null,
+          "subcommands": []
+        }
+      ]
+    },
+    {
+      "module": "welcome",
+      "displayName": "Welcome",
+      "emoji": "👋",
+      "commands": [
+        {
+          "module": "welcome",
+          "name": "welcome",
+          "description": "Preview the welcome, goodbye, or DM greeting card.",
+          "requiredPermit": "admin.welcome",
+          "subcommands": []
+        }
+      ]
+    }
+  ],
+  "commandCount": 52
+}

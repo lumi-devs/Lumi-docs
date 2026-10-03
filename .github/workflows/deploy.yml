@@ -26,57 +26,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Lumi-docs
-        uses: actions/checkout@v7
-        with:
-          path: site
-
-      - name: Checkout lumi-devs/Lumi
-        uses: actions/checkout@v7
-        with:
-          repository: lumi-devs/Lumi
-          path: lumi
-          # Full history and tags, so sync.sh can name the latest release for the version banner.
-          fetch-depth: 0
+      - name: Checkout Lumi-docs
+        uses: actions/checkout@v4
 
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
 
-      - name: Cache Bun dependencies (lumi)
-        uses: actions/cache@v6
+      - name: Cache Bun dependencies
+        uses: actions/cache@v4
         with:
           path: ~/.bun/install/cache
-          key: ${{ runner.os }}-bun-lumi-${{ hashFiles('lumi/bun.lock') }}
-          restore-keys: ${{ runner.os }}-bun-lumi-
+          key: ${{ runner.os }}-bun-${{ hashFiles('bun.lock') }}
+          restore-keys: ${{ runner.os }}-bun-
 
-      - name: Install lumi dependencies
-        working-directory: lumi
+      - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      - name: Sync docs content and generated data into the site
-        working-directory: lumi
-        run: bash scripts/docs/sync.sh "$GITHUB_WORKSPACE/site"
-
-      - name: Cache Bun dependencies (site)
-        uses: actions/cache@v6
-        with:
-          path: ~/.bun/install/cache
-          key: ${{ runner.os }}-bun-site-${{ hashFiles('site/bun.lock') }}
-          restore-keys: ${{ runner.os }}-bun-site-
-
-      - name: Install site dependencies
-        working-directory: site
-        run: bun install
-
       - name: Build site
-        working-directory: site
         run: bun run build
 
-      - uses: actions/configure-pages@v6
+      - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: site/dist
+          path: dist
 
   deploy:
     needs: build

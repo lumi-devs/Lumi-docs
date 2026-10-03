@@ -1,0 +1,1215 @@
+{
+  "rpcActions": [
+    {
+      "name": "auth.whoami",
+      "auth": "public",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Returns { isBotOwner }; defers to the worker PermitResolver."
+    },
+    {
+      "name": "downloader.module.install",
+      "auth": "botOwner",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Install a module from a repo."
+    },
+    {
+      "name": "downloader.module.rollback",
+      "auth": "botOwner",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Roll a module back to a revision."
+    },
+    {
+      "name": "downloader.module.uninstall",
+      "auth": "botOwner",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Uninstall a module."
+    },
+    {
+      "name": "downloader.repo.add",
+      "auth": "botOwner",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Register a module repo."
+    },
+    {
+      "name": "downloader.repo.list",
+      "auth": "botOwner",
+      "timeoutMs": 8000,
+      "requiresEnabled": null,
+      "summary": "List registered repos."
+    },
+    {
+      "name": "downloader.repo.modules",
+      "auth": "botOwner",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "List modules a repo offers."
+    },
+    {
+      "name": "global.gdpr.delete",
+      "auth": "botOwner",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Erase a user's data."
+    },
+    {
+      "name": "global.gdpr.export",
+      "auth": "session",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Export a user's data, keyed by module."
+    },
+    {
+      "name": "global.gdpr.export.start",
+      "auth": "session",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Start an async export of a user's data on the scheduled-tasks queue; returns a job id to poll."
+    },
+    {
+      "name": "global.gdpr.export.status",
+      "auth": "session",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Poll an async GDPR export job; returns a short-lived signed download token once status is done."
+    },
+    {
+      "name": "guild.afk.list",
+      "auth": "guildManager",
+      "timeoutMs": 8000,
+      "requiresEnabled": null,
+      "summary": "List AFK entries."
+    },
+    {
+      "name": "guild.appeals.list",
+      "auth": "guildManager",
+      "timeoutMs": 8000,
+      "requiresEnabled": null,
+      "summary": "Paged appeals for reviewers."
+    },
+    {
+      "name": "guild.appeals.review",
+      "auth": "guildManager",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Approve, deny, blacklist-deny, or dismiss."
+    },
+    {
+      "name": "guild.appeals.submit",
+      "auth": "public",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Submit an appeal message."
+    },
+    {
+      "name": "guild.appeals.verify",
+      "auth": "public",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Verify an appeal link token."
+    },
+    {
+      "name": "guild.audit.list",
+      "auth": "guildManager",
+      "timeoutMs": 12000,
+      "requiresEnabled": null,
+      "summary": "Paged guild audit log."
+    },
+    {
+      "name": "guild.backups.list",
+      "auth": "guildManager",
+      "timeoutMs": 8000,
+      "requiresEnabled": null,
+      "summary": "List guild backups (role/channel counts)."
+    },
+    {
+      "name": "guild.backups.restore",
+      "auth": "guildManager",
+      "timeoutMs": 120000,
+      "requiresEnabled": null,
+      "summary": "Restore a guild backup."
+    },
+    {
+      "name": "guild.blocklist.add",
+      "auth": "guildManager",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Block a user."
+    },
+    {
+      "name": "guild.blocklist.list",
+      "auth": "guildManager",
+      "timeoutMs": 8000,
+      "requiresEnabled": null,
+      "summary": "Paged guild blocklist."
+    },
+    {
+      "name": "guild.blocklist.remove",
+      "auth": "guildManager",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Unblock a user."
+    },
+    {
+      "name": "guild.cases.list",
+      "auth": "guildManager",
+      "timeoutMs": 8000,
+      "requiresEnabled": null,
+      "summary": "Paged moderation cases."
+    },
+    {
+      "name": "guild.cases.revoke",
+      "auth": "guildManager",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Revoke a case."
+    },
+    {
+      "name": "guild.config.set",
+      "auth": "guildManager",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Write one config key (omitted value deletes it)."
+    },
+    {
+      "name": "guild.config.setMany",
+      "auth": "guildManager",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Batch config write, validated per key."
+    },
+    {
+      "name": "guild.entities.get",
+      "auth": "guildManager",
+      "timeoutMs": 12000,
+      "requiresEnabled": null,
+      "summary": "Roles, channels and a member sample for pickers and id lookups."
+    },
+    {
+      "name": "guild.history.list",
+      "auth": "guildManager",
+      "timeoutMs": 8000,
+      "requiresEnabled": null,
+      "summary": "Paged config change history."
+    },
+    {
+      "name": "guild.history.rollback",
+      "auth": "guildManager",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Roll config back to a history entry."
+    },
+    {
+      "name": "guild.ignored.add",
+      "auth": "guildManager",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Ignore a channel; null targets the guild-wide row."
+    },
+    {
+      "name": "guild.ignored.list",
+      "auth": "guildManager",
+      "timeoutMs": 8000,
+      "requiresEnabled": null,
+      "summary": "List ignored channels."
+    },
+    {
+      "name": "guild.ignored.remove",
+      "auth": "guildManager",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Un-ignore a channel."
+    },
+    {
+      "name": "guild.logClaims.dismiss",
+      "auth": "guildManager",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Resolve a claim as confirmed or dismissed; audit-logged."
+    },
+    {
+      "name": "guild.logClaims.issue",
+      "auth": "guildManager",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Issue a one-time code to claim a log channel."
+    },
+    {
+      "name": "guild.logClaims.list",
+      "auth": "guildManager",
+      "timeoutMs": 8000,
+      "requiresEnabled": null,
+      "summary": "List channels pending as log destinations."
+    },
+    {
+      "name": "guild.modNotes.add",
+      "auth": "guildManager",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Add a moderator note."
+    },
+    {
+      "name": "guild.modNotes.list",
+      "auth": "guildManager",
+      "timeoutMs": 8000,
+      "requiresEnabled": null,
+      "summary": "Moderator notes for a user."
+    },
+    {
+      "name": "guild.modNotes.remove",
+      "auth": "guildManager",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Remove a moderator note."
+    },
+    {
+      "name": "guild.module.get",
+      "auth": "guildManager",
+      "timeoutMs": 12000,
+      "requiresEnabled": null,
+      "summary": "One module's manifest, enabled state and config values; null when it isn't loaded."
+    },
+    {
+      "name": "guild.module.toggle",
+      "auth": "guildManager",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Enable or disable a module for a guild."
+    },
+    {
+      "name": "guild.moduleData.list",
+      "auth": "guildManager",
+      "timeoutMs": 8000,
+      "requiresEnabled": null,
+      "summary": "Inspect stored module data."
+    },
+    {
+      "name": "guild.overrides.list",
+      "auth": "guildManager",
+      "timeoutMs": 8000,
+      "requiresEnabled": null,
+      "summary": "List per-channel/role/user config overrides."
+    },
+    {
+      "name": "guild.overrides.set",
+      "auth": "guildManager",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Upsert an override; null value deletes it."
+    },
+    {
+      "name": "guild.panic.get",
+      "auth": "guildManager",
+      "timeoutMs": 8000,
+      "requiresEnabled": null,
+      "summary": "Read panic-mode state."
+    },
+    {
+      "name": "guild.panic.set",
+      "auth": "guildManager",
+      "timeoutMs": 120000,
+      "requiresEnabled": "security",
+      "summary": "Lock down the guild, optionally narrowed to channels."
+    },
+    {
+      "name": "guild.permits.assign",
+      "auth": "guildManager",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Grant a permit to a role or user."
+    },
+    {
+      "name": "guild.permits.create",
+      "auth": "guildManager",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Create an enforced or custom permit."
+    },
+    {
+      "name": "guild.permits.delete",
+      "auth": "guildManager",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Delete a permit."
+    },
+    {
+      "name": "guild.permits.list",
+      "auth": "guildManager",
+      "timeoutMs": 8000,
+      "requiresEnabled": null,
+      "summary": "List permits with assignments."
+    },
+    {
+      "name": "guild.permits.unassign",
+      "auth": "guildManager",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Revoke a permit grant."
+    },
+    {
+      "name": "guild.permits.update",
+      "auth": "guildManager",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Rename or re-scope a permit."
+    },
+    {
+      "name": "guild.reactionroles.menus.delete",
+      "auth": "guildManager",
+      "timeoutMs": 15000,
+      "requiresEnabled": "reactionroles",
+      "summary": "Delete a role menu."
+    },
+    {
+      "name": "guild.reactionroles.menus.list",
+      "auth": "guildManager",
+      "timeoutMs": 8000,
+      "requiresEnabled": null,
+      "summary": "List role menus for a guild."
+    },
+    {
+      "name": "guild.reactionroles.menus.set",
+      "auth": "guildManager",
+      "timeoutMs": 15000,
+      "requiresEnabled": "reactionroles",
+      "summary": "Create or update a role menu with its options."
+    },
+    {
+      "name": "guild.settings.set",
+      "auth": "guildManager",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "General guild settings form."
+    },
+    {
+      "name": "guild.shell.get",
+      "auth": "guildManager",
+      "timeoutMs": 12000,
+      "requiresEnabled": null,
+      "summary": "Guild layout shell: name, icon, member count, settings, module manifests and enabled states."
+    },
+    {
+      "name": "guild.summaries.list",
+      "auth": "session",
+      "timeoutMs": 8000,
+      "requiresEnabled": null,
+      "summary": "Decorative guild rows (icon, banner, member count); omits guilds the actor can't manage."
+    },
+    {
+      "name": "guild.tempvc.generators.list",
+      "auth": "guildManager",
+      "timeoutMs": 8000,
+      "requiresEnabled": null,
+      "summary": "List temporary-voice generator channels."
+    },
+    {
+      "name": "guild.tempvc.generators.set",
+      "auth": "guildManager",
+      "timeoutMs": 15000,
+      "requiresEnabled": "tempvc",
+      "summary": "Upsert a generator; null name deletes it."
+    },
+    {
+      "name": "guild.tempvc.records.list",
+      "auth": "guildManager",
+      "timeoutMs": 8000,
+      "requiresEnabled": null,
+      "summary": "List temporary-voice records."
+    },
+    {
+      "name": "guild.verificationPanel.delete",
+      "auth": "guildManager",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Remove the verification panel."
+    },
+    {
+      "name": "guild.verificationPanel.get",
+      "auth": "guildManager",
+      "timeoutMs": 8000,
+      "requiresEnabled": null,
+      "summary": "Read the verification panel binding."
+    },
+    {
+      "name": "guild.verificationPanel.set",
+      "auth": "guildManager",
+      "timeoutMs": 15000,
+      "requiresEnabled": "security",
+      "summary": "Bind the verification panel."
+    },
+    {
+      "name": "guild.verificationWeb.complete",
+      "auth": "session",
+      "timeoutMs": 15000,
+      "requiresEnabled": "security",
+      "summary": "Complete a web verification flow."
+    },
+    {
+      "name": "guild.warnThresholds.list",
+      "auth": "guildManager",
+      "timeoutMs": 8000,
+      "requiresEnabled": null,
+      "summary": "List warn-count escalation rules."
+    },
+    {
+      "name": "guild.warnThresholds.set",
+      "auth": "guildManager",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Upsert a rule; null action deletes it. mute/voice_mute need a duration."
+    },
+    {
+      "name": "guild.welcome.sendTest",
+      "auth": "guildManager",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Send a test welcome or goodbye message to a guild channel."
+    },
+    {
+      "name": "system.audit.list",
+      "auth": "botOwner",
+      "timeoutMs": 12000,
+      "requiresEnabled": null,
+      "summary": "Cross-guild audit log."
+    },
+    {
+      "name": "system.blocklist.add",
+      "auth": "botOwner",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Add to the global blocklist."
+    },
+    {
+      "name": "system.blocklist.list",
+      "auth": "botOwner",
+      "timeoutMs": 8000,
+      "requiresEnabled": null,
+      "summary": "Global blocklist."
+    },
+    {
+      "name": "system.blocklist.remove",
+      "auth": "botOwner",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Remove from the global blocklist."
+    },
+    {
+      "name": "system.dashboard.get",
+      "auth": "botOwner",
+      "timeoutMs": 8000,
+      "requiresEnabled": null,
+      "summary": "System-panel overview."
+    },
+    {
+      "name": "system.flags.list",
+      "auth": "botOwner",
+      "timeoutMs": 8000,
+      "requiresEnabled": null,
+      "summary": "List all feature flags."
+    },
+    {
+      "name": "system.flags.override.delete",
+      "auth": "botOwner",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Remove a guild's override, returning it to the flag's rollout."
+    },
+    {
+      "name": "system.flags.override.set",
+      "auth": "botOwner",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Force a feature flag on/off for one guild."
+    },
+    {
+      "name": "system.flags.set",
+      "auth": "botOwner",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Create or update a feature flag."
+    },
+    {
+      "name": "system.identity.set",
+      "auth": "botOwner",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Set invite URL and support guild."
+    },
+    {
+      "name": "system.maintenance.set",
+      "auth": "botOwner",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Toggle maintenance mode."
+    },
+    {
+      "name": "system.module.clear",
+      "auth": "botOwner",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Clear a module's global state."
+    },
+    {
+      "name": "system.module.toggle",
+      "auth": "botOwner",
+      "timeoutMs": 15000,
+      "requiresEnabled": null,
+      "summary": "Globally toggle a module."
+    },
+    {
+      "name": "system.shards.get",
+      "auth": "botOwner",
+      "timeoutMs": 8000,
+      "requiresEnabled": null,
+      "summary": "Shard telemetry: replicas, shard states, missing ids."
+    },
+    {
+      "name": "system.status.get",
+      "auth": "botOwner",
+      "timeoutMs": 8000,
+      "requiresEnabled": null,
+      "summary": "Fleet-wide status page snapshot: api, postgres, redis, scheduler, shards, event bus."
+    }
+  ],
+  "rpcActionCount": 82,
+  "rpcSliceGroups": [
+    {
+      "slice": "account",
+      "actions": [
+        {
+          "name": "auth.whoami",
+          "auth": "public",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Returns { isBotOwner }; defers to the worker PermitResolver."
+        },
+        {
+          "name": "global.gdpr.delete",
+          "auth": "botOwner",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Erase a user's data."
+        },
+        {
+          "name": "global.gdpr.export",
+          "auth": "session",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Export a user's data, keyed by module."
+        },
+        {
+          "name": "global.gdpr.export.start",
+          "auth": "session",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Start an async export of a user's data on the scheduled-tasks queue; returns a job id to poll."
+        },
+        {
+          "name": "global.gdpr.export.status",
+          "auth": "session",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Poll an async GDPR export job; returns a short-lived signed download token once status is done."
+        }
+      ]
+    },
+    {
+      "slice": "afk",
+      "actions": [
+        {
+          "name": "guild.afk.list",
+          "auth": "guildManager",
+          "timeoutMs": 8000,
+          "requiresEnabled": null,
+          "summary": "List AFK entries."
+        }
+      ]
+    },
+    {
+      "slice": "core",
+      "actions": [
+        {
+          "name": "guild.blocklist.add",
+          "auth": "guildManager",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Block a user."
+        },
+        {
+          "name": "guild.blocklist.list",
+          "auth": "guildManager",
+          "timeoutMs": 8000,
+          "requiresEnabled": null,
+          "summary": "Paged guild blocklist."
+        },
+        {
+          "name": "guild.blocklist.remove",
+          "auth": "guildManager",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Unblock a user."
+        },
+        {
+          "name": "guild.ignored.add",
+          "auth": "guildManager",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Ignore a channel; null targets the guild-wide row."
+        },
+        {
+          "name": "guild.ignored.list",
+          "auth": "guildManager",
+          "timeoutMs": 8000,
+          "requiresEnabled": null,
+          "summary": "List ignored channels."
+        },
+        {
+          "name": "guild.ignored.remove",
+          "auth": "guildManager",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Un-ignore a channel."
+        },
+        {
+          "name": "guild.permits.assign",
+          "auth": "guildManager",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Grant a permit to a role or user."
+        },
+        {
+          "name": "guild.permits.create",
+          "auth": "guildManager",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Create an enforced or custom permit."
+        },
+        {
+          "name": "guild.permits.delete",
+          "auth": "guildManager",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Delete a permit."
+        },
+        {
+          "name": "guild.permits.list",
+          "auth": "guildManager",
+          "timeoutMs": 8000,
+          "requiresEnabled": null,
+          "summary": "List permits with assignments."
+        },
+        {
+          "name": "guild.permits.unassign",
+          "auth": "guildManager",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Revoke a permit grant."
+        },
+        {
+          "name": "guild.permits.update",
+          "auth": "guildManager",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Rename or re-scope a permit."
+        }
+      ]
+    },
+    {
+      "slice": "dashboard",
+      "actions": [
+        {
+          "name": "guild.audit.list",
+          "auth": "guildManager",
+          "timeoutMs": 12000,
+          "requiresEnabled": null,
+          "summary": "Paged guild audit log."
+        },
+        {
+          "name": "guild.config.set",
+          "auth": "guildManager",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Write one config key (omitted value deletes it)."
+        },
+        {
+          "name": "guild.config.setMany",
+          "auth": "guildManager",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Batch config write, validated per key."
+        },
+        {
+          "name": "guild.entities.get",
+          "auth": "guildManager",
+          "timeoutMs": 12000,
+          "requiresEnabled": null,
+          "summary": "Roles, channels and a member sample for pickers and id lookups."
+        },
+        {
+          "name": "guild.history.list",
+          "auth": "guildManager",
+          "timeoutMs": 8000,
+          "requiresEnabled": null,
+          "summary": "Paged config change history."
+        },
+        {
+          "name": "guild.history.rollback",
+          "auth": "guildManager",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Roll config back to a history entry."
+        },
+        {
+          "name": "guild.module.get",
+          "auth": "guildManager",
+          "timeoutMs": 12000,
+          "requiresEnabled": null,
+          "summary": "One module's manifest, enabled state and config values; null when it isn't loaded."
+        },
+        {
+          "name": "guild.module.toggle",
+          "auth": "guildManager",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Enable or disable a module for a guild."
+        },
+        {
+          "name": "guild.moduleData.list",
+          "auth": "guildManager",
+          "timeoutMs": 8000,
+          "requiresEnabled": null,
+          "summary": "Inspect stored module data."
+        },
+        {
+          "name": "guild.overrides.list",
+          "auth": "guildManager",
+          "timeoutMs": 8000,
+          "requiresEnabled": null,
+          "summary": "List per-channel/role/user config overrides."
+        },
+        {
+          "name": "guild.overrides.set",
+          "auth": "guildManager",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Upsert an override; null value deletes it."
+        },
+        {
+          "name": "guild.settings.set",
+          "auth": "guildManager",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "General guild settings form."
+        },
+        {
+          "name": "guild.shell.get",
+          "auth": "guildManager",
+          "timeoutMs": 12000,
+          "requiresEnabled": null,
+          "summary": "Guild layout shell: name, icon, member count, settings, module manifests and enabled states."
+        },
+        {
+          "name": "guild.summaries.list",
+          "auth": "session",
+          "timeoutMs": 8000,
+          "requiresEnabled": null,
+          "summary": "Decorative guild rows (icon, banner, member count); omits guilds the actor can't manage."
+        }
+      ]
+    },
+    {
+      "slice": "downloader",
+      "actions": [
+        {
+          "name": "downloader.module.install",
+          "auth": "botOwner",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Install a module from a repo."
+        },
+        {
+          "name": "downloader.module.rollback",
+          "auth": "botOwner",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Roll a module back to a revision."
+        },
+        {
+          "name": "downloader.module.uninstall",
+          "auth": "botOwner",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Uninstall a module."
+        },
+        {
+          "name": "downloader.repo.add",
+          "auth": "botOwner",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Register a module repo."
+        },
+        {
+          "name": "downloader.repo.list",
+          "auth": "botOwner",
+          "timeoutMs": 8000,
+          "requiresEnabled": null,
+          "summary": "List registered repos."
+        },
+        {
+          "name": "downloader.repo.modules",
+          "auth": "botOwner",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "List modules a repo offers."
+        }
+      ]
+    },
+    {
+      "slice": "logging",
+      "actions": [
+        {
+          "name": "guild.logClaims.dismiss",
+          "auth": "guildManager",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Resolve a claim as confirmed or dismissed; audit-logged."
+        },
+        {
+          "name": "guild.logClaims.issue",
+          "auth": "guildManager",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Issue a one-time code to claim a log channel."
+        },
+        {
+          "name": "guild.logClaims.list",
+          "auth": "guildManager",
+          "timeoutMs": 8000,
+          "requiresEnabled": null,
+          "summary": "List channels pending as log destinations."
+        }
+      ]
+    },
+    {
+      "slice": "mod",
+      "actions": [
+        {
+          "name": "guild.appeals.list",
+          "auth": "guildManager",
+          "timeoutMs": 8000,
+          "requiresEnabled": null,
+          "summary": "Paged appeals for reviewers."
+        },
+        {
+          "name": "guild.appeals.review",
+          "auth": "guildManager",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Approve, deny, blacklist-deny, or dismiss."
+        },
+        {
+          "name": "guild.appeals.submit",
+          "auth": "public",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Submit an appeal message."
+        },
+        {
+          "name": "guild.appeals.verify",
+          "auth": "public",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Verify an appeal link token."
+        },
+        {
+          "name": "guild.cases.list",
+          "auth": "guildManager",
+          "timeoutMs": 8000,
+          "requiresEnabled": null,
+          "summary": "Paged moderation cases."
+        },
+        {
+          "name": "guild.cases.revoke",
+          "auth": "guildManager",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Revoke a case."
+        },
+        {
+          "name": "guild.modNotes.add",
+          "auth": "guildManager",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Add a moderator note."
+        },
+        {
+          "name": "guild.modNotes.list",
+          "auth": "guildManager",
+          "timeoutMs": 8000,
+          "requiresEnabled": null,
+          "summary": "Moderator notes for a user."
+        },
+        {
+          "name": "guild.modNotes.remove",
+          "auth": "guildManager",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Remove a moderator note."
+        },
+        {
+          "name": "guild.warnThresholds.list",
+          "auth": "guildManager",
+          "timeoutMs": 8000,
+          "requiresEnabled": null,
+          "summary": "List warn-count escalation rules."
+        },
+        {
+          "name": "guild.warnThresholds.set",
+          "auth": "guildManager",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Upsert a rule; null action deletes it. mute/voice_mute need a duration."
+        }
+      ]
+    },
+    {
+      "slice": "reactionroles",
+      "actions": [
+        {
+          "name": "guild.reactionroles.menus.delete",
+          "auth": "guildManager",
+          "timeoutMs": 15000,
+          "requiresEnabled": "reactionroles",
+          "summary": "Delete a role menu."
+        },
+        {
+          "name": "guild.reactionroles.menus.list",
+          "auth": "guildManager",
+          "timeoutMs": 8000,
+          "requiresEnabled": null,
+          "summary": "List role menus for a guild."
+        },
+        {
+          "name": "guild.reactionroles.menus.set",
+          "auth": "guildManager",
+          "timeoutMs": 15000,
+          "requiresEnabled": "reactionroles",
+          "summary": "Create or update a role menu with its options."
+        }
+      ]
+    },
+    {
+      "slice": "security",
+      "actions": [
+        {
+          "name": "guild.backups.list",
+          "auth": "guildManager",
+          "timeoutMs": 8000,
+          "requiresEnabled": null,
+          "summary": "List guild backups (role/channel counts)."
+        },
+        {
+          "name": "guild.backups.restore",
+          "auth": "guildManager",
+          "timeoutMs": 120000,
+          "requiresEnabled": null,
+          "summary": "Restore a guild backup."
+        },
+        {
+          "name": "guild.panic.get",
+          "auth": "guildManager",
+          "timeoutMs": 8000,
+          "requiresEnabled": null,
+          "summary": "Read panic-mode state."
+        },
+        {
+          "name": "guild.panic.set",
+          "auth": "guildManager",
+          "timeoutMs": 120000,
+          "requiresEnabled": "security",
+          "summary": "Lock down the guild, optionally narrowed to channels."
+        },
+        {
+          "name": "guild.verificationPanel.delete",
+          "auth": "guildManager",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Remove the verification panel."
+        },
+        {
+          "name": "guild.verificationPanel.get",
+          "auth": "guildManager",
+          "timeoutMs": 8000,
+          "requiresEnabled": null,
+          "summary": "Read the verification panel binding."
+        },
+        {
+          "name": "guild.verificationPanel.set",
+          "auth": "guildManager",
+          "timeoutMs": 15000,
+          "requiresEnabled": "security",
+          "summary": "Bind the verification panel."
+        },
+        {
+          "name": "guild.verificationWeb.complete",
+          "auth": "session",
+          "timeoutMs": 15000,
+          "requiresEnabled": "security",
+          "summary": "Complete a web verification flow."
+        }
+      ]
+    },
+    {
+      "slice": "system",
+      "actions": [
+        {
+          "name": "system.audit.list",
+          "auth": "botOwner",
+          "timeoutMs": 12000,
+          "requiresEnabled": null,
+          "summary": "Cross-guild audit log."
+        },
+        {
+          "name": "system.blocklist.add",
+          "auth": "botOwner",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Add to the global blocklist."
+        },
+        {
+          "name": "system.blocklist.list",
+          "auth": "botOwner",
+          "timeoutMs": 8000,
+          "requiresEnabled": null,
+          "summary": "Global blocklist."
+        },
+        {
+          "name": "system.blocklist.remove",
+          "auth": "botOwner",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Remove from the global blocklist."
+        },
+        {
+          "name": "system.dashboard.get",
+          "auth": "botOwner",
+          "timeoutMs": 8000,
+          "requiresEnabled": null,
+          "summary": "System-panel overview."
+        },
+        {
+          "name": "system.flags.list",
+          "auth": "botOwner",
+          "timeoutMs": 8000,
+          "requiresEnabled": null,
+          "summary": "List all feature flags."
+        },
+        {
+          "name": "system.flags.override.delete",
+          "auth": "botOwner",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Remove a guild's override, returning it to the flag's rollout."
+        },
+        {
+          "name": "system.flags.override.set",
+          "auth": "botOwner",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Force a feature flag on/off for one guild."
+        },
+        {
+          "name": "system.flags.set",
+          "auth": "botOwner",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Create or update a feature flag."
+        },
+        {
+          "name": "system.identity.set",
+          "auth": "botOwner",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Set invite URL and support guild."
+        },
+        {
+          "name": "system.maintenance.set",
+          "auth": "botOwner",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Toggle maintenance mode."
+        },
+        {
+          "name": "system.module.clear",
+          "auth": "botOwner",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Clear a module's global state."
+        },
+        {
+          "name": "system.module.toggle",
+          "auth": "botOwner",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Globally toggle a module."
+        },
+        {
+          "name": "system.shards.get",
+          "auth": "botOwner",
+          "timeoutMs": 8000,
+          "requiresEnabled": null,
+          "summary": "Shard telemetry: replicas, shard states, missing ids."
+        },
+        {
+          "name": "system.status.get",
+          "auth": "botOwner",
+          "timeoutMs": 8000,
+          "requiresEnabled": null,
+          "summary": "Fleet-wide status page snapshot: api, postgres, redis, scheduler, shards, event bus."
+        }
+      ]
+    },
+    {
+      "slice": "tempvc",
+      "actions": [
+        {
+          "name": "guild.tempvc.generators.list",
+          "auth": "guildManager",
+          "timeoutMs": 8000,
+          "requiresEnabled": null,
+          "summary": "List temporary-voice generator channels."
+        },
+        {
+          "name": "guild.tempvc.generators.set",
+          "auth": "guildManager",
+          "timeoutMs": 15000,
+          "requiresEnabled": "tempvc",
+          "summary": "Upsert a generator; null name deletes it."
+        },
+        {
+          "name": "guild.tempvc.records.list",
+          "auth": "guildManager",
+          "timeoutMs": 8000,
+          "requiresEnabled": null,
+          "summary": "List temporary-voice records."
+        }
+      ]
+    },
+    {
+      "slice": "welcome",
+      "actions": [
+        {
+          "name": "guild.welcome.sendTest",
+          "auth": "guildManager",
+          "timeoutMs": 15000,
+          "requiresEnabled": null,
+          "summary": "Send a test welcome or goodbye message to a guild channel."
+        }
+      ]
+    }
+  ]
+}
