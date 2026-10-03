@@ -5,8 +5,3 @@ next-env.d.ts
 .source/
 *.tsbuildinfo
 
-# Pulled at build time from lumi-devs/Lumi via scripts/docs/sync.sh — build
-# inputs, not source held in this repo.
-/content/
-/data/
-/public/synced/

@@ -1,0 +1,575 @@
+{
+  "sdkImportGroups": [
+    {
+      "importPath": "lumi",
+      "file": "packages/core/src/lib/addon-sandbox/sdk/index.ts",
+      "exports": [
+        {
+          "name": "cfg",
+          "kind": "const",
+          "signature": "const cfg: { object<T extends Record<string, BaseValidator<any>>>(shape: T): ObjectValidator<{ [x: string]: ...; }, UndefinedToOptional<{ [x: string]: ...; }>>; ... 13 more ...; objectArray<T extends Record<string, BaseValidator<any>>>(shape: T, o: BaseOpts & { default?: Array<Record<string, unknown>>; }): ArrayValidator<...>; }",
+          "summary": "Config field builders tagged with UI metadata."
+        },
+        {
+          "name": "ConfigField",
+          "kind": "interface",
+          "signature": "export interface ConfigField {\n    key: string;\n    label: string;\n    type: FieldType;\n    description: string;\n    default?: unknown;\n    choices?: string[];\n    required?: boolean;\n    channelTypes?: ChannelType[];\n    claimable?: boolean;\n    step?: number;\n    min?: number;\n    max?: number;\n    quickPicks?: string[];\n    group?: string;\n    section?: string;\n    subfields?: ConfigField[];\n    format?: string;\n    templateVars?: string[];\n    richPreview?: {\n        accentColorKey?: string;\n        footerKey?: string;\n        imageUrlsKey?: string;\n        buttonsKey?: string;\n        thumbnailKey?: string;\n    };\n    pairedWith?: string;\n    enabledBy?: string;\n    widget?: ConfigWidget;\n}",
+          "summary": ""
+        },
+        {
+          "name": "DefineModule",
+          "kind": "function",
+          "signature": "function DefineModule(options: ModuleOptions): <T extends abstract new (...args: any[]) => Module>(target: T) => T",
+          "summary": ""
+        },
+        {
+          "name": "FieldType",
+          "kind": "enum",
+          "signature": "export enum FieldType {\n    Boolean = \"BOOLEAN\",\n    Number = \"NUMBER\",\n    String = \"STRING\",\n    Enum = \"ENUM\",\n    Channel = \"CHANNEL\",\n    Role = \"ROLE\",\n    User = \"USER\",\n    Duration = \"DURATION\",\n    MultiRole = \"MULTI_ROLE\",\n    MultiChannel = \"MULTI_CHANNEL\",\n    MultiUser = \"MULTI_USER\",\n    StringList = \"STRING_LIST\",\n    ObjectArray = \"OBJECT_ARRAY\",\n    ComponentsV2Blocks = \"COMPONENTS_V2_BLOCKS\"\n}",
+          "summary": ""
+        },
+        {
+          "name": "logger",
+          "kind": "const",
+          "signature": "const logger: { info: (message: string) => Promise<unknown>; warn: (message: string) => Promise<unknown>; error: (message: string) => Promise<unknown>; }",
+          "summary": ""
+        },
+        {
+          "name": "Module",
+          "kind": "class",
+          "signature": "abstract class Module {\n  meta: ModuleMeta | undefined;\n}",
+          "summary": ""
+        },
+        {
+          "name": "ModuleConfigSchema",
+          "kind": "type",
+          "signature": "export type ModuleConfigSchema = BaseValidator<Record<string, unknown>>;",
+          "summary": "A validated object schema produced by `cfg.object(...)`."
+        },
+        {
+          "name": "ModuleMeta",
+          "kind": "type",
+          "signature": "export type ModuleMeta = ModuleOptions & {\n    displayName: string;\n    configFields: ConfigField[];\n};",
+          "summary": ""
+        },
+        {
+          "name": "ModuleOptions",
+          "kind": "type",
+          "signature": "export type ModuleOptions = Omit<ModuleDefinition, \"configOverrides\" | \"dashboardHref\"> & {\n    name: string;\n};",
+          "summary": ""
+        },
+        {
+          "name": "NoEndUserData",
+          "kind": "function",
+          "signature": "function NoEndUserData(): undefined",
+          "summary": "Explicit sentinel function declaring that a module does not persistently store\nend-user data (GDPR/CCPA compliant declaration)."
+        },
+        {
+          "name": "toStringArray",
+          "kind": "function",
+          "signature": "function toStringArray(value: unknown): string[]",
+          "summary": "Reads a stored typed-array config value, dropping non-string entries."
+        }
+      ]
+    },
+    {
+      "importPath": "lumi/commands",
+      "file": "packages/core/src/lib/addon-sandbox/sdk/commands.ts",
+      "exports": [
+        {
+          "name": "BaseCommand",
+          "kind": "class",
+          "signature": "abstract class BaseCommand {\n  readonly name: string;\n  readonly description: string;\n  readonly options: CommandOptions;\n  constructor(options: CommandOptions): BaseCommand;\n  registerApplicationCommands(registry: CommandRegistry): void;\n  abstract run(ctx: CommandContext): unknown | Promise<unknown>;\n}",
+          "summary": ""
+        },
+        {
+          "name": "BaseSubcommand",
+          "kind": "class",
+          "signature": "abstract class BaseSubcommand {\n  constructor(options: SubcommandOptions): BaseSubcommand;\n  readonly subcommands: SubcommandRoute[];\n  run(ctx: CommandContext): unknown | Promise<unknown>;\n}",
+          "summary": ""
+        },
+        {
+          "name": "CommandContext",
+          "kind": "class",
+          "signature": "class CommandContext {\n  readonly isSlash: boolean;\n  readonly guildId: string | null;\n  readonly channelId: string;\n  readonly user: SerialisedUser;\n  readonly member: SerialisedMember | null;\n  readonly subcommand: string | null;\n  constructor(invocation: AddonCommandInvocation): CommandContext;\n  getString(name: string, spec?: CtxOptionSpec): Promise<string | null>;\n  getInteger(name: string, spec?: CtxOptionSpec): Promise<number | null>;\n  getNumber(name: string, spec?: CtxOptionSpec): Promise<number | null>;\n  getBoolean(name: string, spec?: CtxOptionSpec): Promise<boolean | null>;\n  defer(opts?: CtxReplyOptions): Promise<void>;\n  reply(card: CardReply, opts?: CtxReplyOptions): Promise<void>;\n  replySuccess(title: string, body: string, opts?: CtxReplyOptions): Promise<void>;\n  replyError(title: string, body: string, opts?: CtxReplyOptions): Promise<void>;\n  replyWarning(title: string, body: string, opts?: CtxReplyOptions): Promise<void>;\n  replyInfo(title: string, body: string, opts?: CtxReplyOptions): Promise<void>;\n  replyEmpty(title: string, reason: string, suggestion?: string, opts?: CtxReplyOptions): Promise<void>;\n  checkPermit(node: string): Promise<void>;\n}",
+          "summary": ""
+        },
+        {
+          "name": "CommandOptions",
+          "kind": "interface",
+          "signature": "export interface CommandOptions {\n    name: string;\n    description: string;\n    requiredPermit?: string;\n    cooldownDelay?: number;\n    prefixEnabled?: boolean;\n}",
+          "summary": ""
+        },
+        {
+          "name": "CommandRegistry",
+          "kind": "interface",
+          "signature": "export interface CommandRegistry {\n    registerChatInputCommand(build: (builder: SlashCommandBuilder) => {\n        toJSON(): unknown;\n    }): void;\n}",
+          "summary": ""
+        },
+        {
+          "name": "CtxOptionSpec",
+          "kind": "interface",
+          "signature": "export interface CtxOptionSpec {\n    required?: boolean;\n    rest?: boolean;\n}",
+          "summary": ""
+        },
+        {
+          "name": "CtxReplyOptions",
+          "kind": "interface",
+          "signature": "export interface CtxReplyOptions {\n    ephemeral?: boolean;\n}",
+          "summary": ""
+        },
+        {
+          "name": "SubcommandOptions",
+          "kind": "interface",
+          "signature": "export interface SubcommandOptions extends CommandOptions {\n    subcommands: SubcommandRoute[];\n}",
+          "summary": ""
+        },
+        {
+          "name": "SubcommandRoute",
+          "kind": "interface",
+          "signature": "export interface SubcommandRoute {\n    name: string;\n    run: string;\n}",
+          "summary": ""
+        }
+      ]
+    },
+    {
+      "importPath": "lumi/config",
+      "file": "packages/core/src/lib/addon-sandbox/sdk/config.ts",
+      "exports": [
+        {
+          "name": "getModuleConfig",
+          "kind": "function",
+          "signature": "function getModuleConfig(key: string, guildId?: string): Promise<unknown>",
+          "summary": ""
+        }
+      ]
+    },
+    {
+      "importPath": "lumi/discord",
+      "file": "packages/core/src/lib/addon-sandbox/sdk/discord.ts",
+      "exports": [
+        {
+          "name": "channels",
+          "kind": "const",
+          "signature": "const channels: { send(channelId: string, payload: MessagePayload): Promise<SentMessage>; }",
+          "summary": ""
+        },
+        {
+          "name": "MessagePayload",
+          "kind": "type",
+          "signature": "export type MessagePayload = CardReply | {\n    content?: string;\n    components?: unknown[];\n};",
+          "summary": ""
+        },
+        {
+          "name": "messages",
+          "kind": "const",
+          "signature": "const messages: { fetch(channelId: string, messageId: string): Promise<(SentMessage & { content: string; }) | null>; edit(channelId: string, messageId: string, payload: MessagePayload): Promise<SentMessage>; }",
+          "summary": ""
+        },
+        {
+          "name": "SentMessage",
+          "kind": "interface",
+          "signature": "export interface SentMessage {\n    id: string;\n    channelId: string;\n}",
+          "summary": ""
+        }
+      ]
+    },
+    {
+      "importPath": "lumi/interactions",
+      "file": "packages/core/src/lib/addon-sandbox/sdk/interactions.ts",
+      "exports": [
+        {
+          "name": "BaseInteractionHandler",
+          "kind": "class",
+          "signature": "abstract class BaseInteractionHandler {\n  readonly prefix: string;\n  abstract run(ctx: InteractionContext): unknown | Promise<unknown>;\n}",
+          "summary": ""
+        },
+        {
+          "name": "deferUpdate",
+          "kind": "function",
+          "signature": "function deferUpdate(): Promise<void>",
+          "summary": ""
+        },
+        {
+          "name": "editReply",
+          "kind": "function",
+          "signature": "function editReply(payload: { content?: string; components?: unknown[]; }): Promise<void>",
+          "summary": ""
+        },
+        {
+          "name": "InteractionContext",
+          "kind": "class",
+          "signature": "class InteractionContext {\n  readonly customId: string;\n  readonly guildId: string | null;\n  readonly channelId: string;\n  readonly user: SerialisedUser;\n  readonly member: SerialisedMember | null;\n  readonly values: string[];\n  readonly fields: Record<string, string>;\n  constructor(invocation: AddonInteractionInvocation): InteractionContext;\n  reply(card: CardReply, opts?: { ephemeral?: boolean; }): Promise<void>;\n  replySuccess(title: string, body: string): Promise<void>;\n  replyError(title: string, body: string): Promise<void>;\n  replyWarning(title: string, body: string): Promise<void>;\n  replyInfo(title: string, body: string): Promise<void>;\n  defer(opts?: { ephemeral?: boolean; }): Promise<void>;\n  showModal(modal: { toJSON(): unknown; }): Promise<void>;\n}",
+          "summary": ""
+        }
+      ]
+    },
+    {
+      "importPath": "lumi/kv",
+      "file": "packages/core/src/lib/addon-sandbox/sdk/kv.ts",
+      "exports": [
+        {
+          "name": "get",
+          "kind": "function",
+          "signature": "function get<T = unknown>(guildId: string, targetId: string, key: string): Promise<T | null>",
+          "summary": ""
+        },
+        {
+          "name": "list",
+          "kind": "function",
+          "signature": "function list<T = unknown>(key: string, guildId?: string): Promise<{ guildId: string; targetId: string; value: T; }[]>",
+          "summary": ""
+        },
+        {
+          "name": "remove",
+          "kind": "function",
+          "signature": "function remove(guildId: string, targetId: string, key: string): Promise<number>",
+          "summary": ""
+        },
+        {
+          "name": "set",
+          "kind": "function",
+          "signature": "function set<T = unknown>(guildId: string, targetId: string, key: string, value: T): Promise<void>",
+          "summary": ""
+        }
+      ]
+    },
+    {
+      "importPath": "lumi/permissions",
+      "file": "packages/core/src/lib/addon-sandbox/sdk/permissions.ts",
+      "exports": [
+        {
+          "name": "checkPermit",
+          "kind": "function",
+          "signature": "function checkPermit(node: string): Promise<void>",
+          "summary": ""
+        }
+      ]
+    },
+    {
+      "importPath": "lumi/redis",
+      "file": "packages/core/src/lib/addon-sandbox/sdk/redis.ts",
+      "exports": [
+        {
+          "name": "del",
+          "kind": "function",
+          "signature": "function del(key: string): Promise<number>",
+          "summary": ""
+        },
+        {
+          "name": "sadd",
+          "kind": "function",
+          "signature": "function sadd(key: string, ...members: string[]): Promise<number>",
+          "summary": ""
+        },
+        {
+          "name": "scard",
+          "kind": "function",
+          "signature": "function scard(key: string): Promise<number>",
+          "summary": ""
+        },
+        {
+          "name": "smembers",
+          "kind": "function",
+          "signature": "function smembers(key: string): Promise<string[]>",
+          "summary": ""
+        },
+        {
+          "name": "srem",
+          "kind": "function",
+          "signature": "function srem(key: string, ...members: string[]): Promise<number>",
+          "summary": ""
+        }
+      ]
+    },
+    {
+      "importPath": "lumi/scheduling",
+      "file": "packages/core/src/lib/addon-sandbox/sdk/scheduling.ts",
+      "exports": [
+        {
+          "name": "getTaskHandler",
+          "kind": "function",
+          "signature": "function getTaskHandler(task: string): TaskFireHandler | undefined",
+          "summary": ""
+        },
+        {
+          "name": "registeredTasks",
+          "kind": "function",
+          "signature": "function registeredTasks(): string[]",
+          "summary": ""
+        },
+        {
+          "name": "registerTaskFireHandler",
+          "kind": "function",
+          "signature": "function registerTaskFireHandler(task: string, handler: TaskFireHandler): void",
+          "summary": ""
+        },
+        {
+          "name": "schedule",
+          "kind": "function",
+          "signature": "function schedule(task: string, payload: Record<string, unknown>, options?: { delay?: number; }): Promise<void>",
+          "summary": ""
+        },
+        {
+          "name": "TaskFireHandler",
+          "kind": "type",
+          "signature": "export type TaskFireHandler = (payload: Record<string, unknown>) => void | Promise<void>;",
+          "summary": ""
+        }
+      ]
+    },
+    {
+      "importPath": "lumi/ui",
+      "file": "packages/core/src/lib/addon-sandbox/sdk/ui.ts",
+      "exports": [
+        {
+          "name": "AccessoryButton",
+          "kind": "interface",
+          "signature": "export interface AccessoryButton {\n    customId: string;\n    label?: string;\n    style?: ButtonStyle;\n    emoji?: string | APIMessageComponentEmoji;\n    disabled?: boolean;\n}",
+          "summary": ""
+        },
+        {
+          "name": "backRow",
+          "kind": "function",
+          "signature": "function backRow(customId: string, label?: string): ActionRowBuilder<ButtonBuilder>",
+          "summary": "A lone back button row for subpanels."
+        },
+        {
+          "name": "BrandColors",
+          "kind": "const",
+          "signature": "const BrandColors: { readonly primary: 5009141; readonly primaryAlt: 3890139; readonly info: 5009141; readonly success: 1226886; readonly warning: 16097024; readonly error: 16405074; readonly neutral: 4804695; readonly gold: 16766011; readonly purple: 9926138; readonly cyan: 2275535; }",
+          "summary": "Discord embed color values (integer format for discord.js)"
+        },
+        {
+          "name": "ButtonLabelLimit",
+          "kind": "const",
+          "signature": "const ButtonLabelLimit: 80",
+          "summary": ""
+        },
+        {
+          "name": "CardColorKey",
+          "kind": "type",
+          "signature": "export type CardColorKey = keyof typeof BrandColors;",
+          "summary": ""
+        },
+        {
+          "name": "CardOptions",
+          "kind": "interface",
+          "signature": "export interface CardOptions {\n    subtitle?: string;\n    breadcrumbs?: string[];\n    statusBadge?: {\n        status: string;\n        label?: string;\n    };\n    footer?: string;\n    thumbnail?: string;\n    thumbnailUrl?: string;\n    divider?: boolean;\n    sections?: SectionBuilder[];\n    actionRows?: ActionRowBuilder<MessageActionRowComponentBuilder | any>[];\n    separatorAboveActionRows?: boolean;\n    mediaGallery?: MediaGalleryBuilder;\n    headerImages?: string[];\n}",
+          "summary": ""
+        },
+        {
+          "name": "CardReply",
+          "kind": "interface",
+          "signature": "export interface CardReply {\n    readonly flags?: number;\n    readonly components: readonly ContainerBuilder[];\n    readonly allowedMentions?: MessageMentionOptions;\n}",
+          "summary": ""
+        },
+        {
+          "name": "confirmPrompt",
+          "kind": "function",
+          "signature": "function confirmPrompt(ctx: ConfirmPromptContext, opts: ConfirmPromptOptions): Promise<ConfirmPromptResult>",
+          "summary": "Shows a Confirm/Cancel button prompt and resolves once the invoker clicks\none, or to `confirmed: false` if the prompt times out. Works uniformly\nacross the slash, prefix, and channel-send paths."
+        },
+        {
+          "name": "ConfirmPromptOptions",
+          "kind": "interface",
+          "signature": "export interface ConfirmPromptOptions {\n    title: string;\n    body: string;\n    confirmLabel?: string;\n    cancelLabel?: string;\n    time?: number;\n    channel?: GuildTextBasedChannel;\n}",
+          "summary": ""
+        },
+        {
+          "name": "confirmRow",
+          "kind": "function",
+          "signature": "function confirmRow(options: ConfirmRowOptions): ActionRowBuilder<ButtonBuilder>",
+          "summary": "Standard destructive-action confirmation pair: Danger confirm + Secondary cancel."
+        },
+        {
+          "name": "ConfirmRowOptions",
+          "kind": "interface",
+          "signature": "export interface ConfirmRowOptions {\n    confirmId: string;\n    cancelId: string;\n    confirmLabel?: string;\n    cancelLabel?: string;\n    confirmStyle?: ButtonStyle;\n}",
+          "summary": ""
+        },
+        {
+          "name": "Emojis",
+          "kind": "const",
+          "signature": "const Emojis: { readonly custom: (customId: string, fallback: string) => string; readonly parse: (emoji: string) => { name: string; id?: string; animated?: boolean; }; readonly Success: string; ... 52 more ...; readonly Sql: string; }",
+          "summary": ""
+        },
+        {
+          "name": "ephemeralCard",
+          "kind": "const",
+          "signature": "const ephemeralCard: (card: CardReply) => CardReply",
+          "summary": ""
+        },
+        {
+          "name": "HubTabs",
+          "kind": "const",
+          "signature": "const HubTabs: readonly Tab[]",
+          "summary": "Hub and detail tab set backing the Home/Modules/Permissions/Settings/Addons bar."
+        },
+        {
+          "name": "makeCard",
+          "kind": "const",
+          "signature": "const makeCard: (color: number | undefined, title: string, body: string | string[], opts?: CardOptions) => CardReply",
+          "summary": ""
+        },
+        {
+          "name": "makeEmptyCard",
+          "kind": "function",
+          "signature": "function makeEmptyCard(title: string, reason: string, suggestion?: string, opts?: CardOptions): CardReply",
+          "summary": ""
+        },
+        {
+          "name": "makeErrorCard",
+          "kind": "const",
+          "signature": "const makeErrorCard: (title: string, body: string | string[], opts?: CardOptions) => CardReply",
+          "summary": ""
+        },
+        {
+          "name": "makeInfoCard",
+          "kind": "const",
+          "signature": "const makeInfoCard: (title: string, body: string | string[], opts?: CardOptions) => CardReply",
+          "summary": ""
+        },
+        {
+          "name": "makeListCard",
+          "kind": "function",
+          "signature": "function makeListCard(title: string, items: string[], opts?: CardOptions): CardReply",
+          "summary": ""
+        },
+        {
+          "name": "makeSuccessCard",
+          "kind": "const",
+          "signature": "const makeSuccessCard: (title: string, body: string | string[], opts?: CardOptions) => CardReply",
+          "summary": ""
+        },
+        {
+          "name": "makeWarningCard",
+          "kind": "const",
+          "signature": "const makeWarningCard: (title: string, body: string | string[], opts?: CardOptions) => CardReply",
+          "summary": ""
+        },
+        {
+          "name": "NavAction",
+          "kind": "interface",
+          "signature": "export interface NavAction {\n    customId: string;\n    label: string;\n    style?: ButtonStyle;\n    emoji?: string | APIMessageComponentEmoji;\n    disabled?: boolean;\n}",
+          "summary": ""
+        },
+        {
+          "name": "navRow",
+          "kind": "function",
+          "signature": "function navRow(options: NavRowOptions): ActionRowBuilder<ButtonBuilder>",
+          "summary": "Detail-view navigation: a Back button plus one primary action.\nKeeps subpanel footers uniform across hub, detail, and addon views."
+        },
+        {
+          "name": "NavRowOptions",
+          "kind": "interface",
+          "signature": "export interface NavRowOptions {\n    backId: string;\n    backLabel?: string;\n    action: NavAction;\n}",
+          "summary": ""
+        },
+        {
+          "name": "noPingCard",
+          "kind": "const",
+          "signature": "const noPingCard: (card: CardReply) => CardReply",
+          "summary": ""
+        },
+        {
+          "name": "pageFooter",
+          "kind": "function",
+          "signature": "function pageFooter(pageIndex: number, totalPages: number, hintOrTotalItems?: string | number): TextDisplayBuilder",
+          "summary": "Small muted footer line for paged panels: `Page x of y` plus a hint."
+        },
+        {
+          "name": "paginateContainer",
+          "kind": "function",
+          "signature": "function paginateContainer(options: PaginationOptions): Promise<void>",
+          "summary": ""
+        },
+        {
+          "name": "paginateList",
+          "kind": "function",
+          "signature": "function paginateList(options: PaginateListOptions): Promise<void>",
+          "summary": ""
+        },
+        {
+          "name": "resolveCardColor",
+          "kind": "function",
+          "signature": "function resolveCardColor(key: CardColorKey): number | undefined",
+          "summary": "Single resolution path for card colors - checks the operator's `config/bot.ts` override before falling back to the built-in palette."
+        },
+        {
+          "name": "SectionLineLimit",
+          "kind": "const",
+          "signature": "const SectionLineLimit: 3",
+          "summary": ""
+        },
+        {
+          "name": "settingRow",
+          "kind": "function",
+          "signature": "function settingRow(lines: string | string[], button: AccessoryButton): SectionBuilder",
+          "summary": "A \"setting row\": up to three text lines with an inline accessory button.\nThe core list-row primitive for panels — label + value + Edit/Toggle button."
+        },
+        {
+          "name": "Tab",
+          "kind": "interface",
+          "signature": "export interface Tab {\n    id: string;\n    label: string;\n    emoji?: string;\n}",
+          "summary": ""
+        },
+        {
+          "name": "tabRow",
+          "kind": "function",
+          "signature": "function tabRow(prefix: string, tabs: readonly Tab[], activeId: string): ActionRowBuilder<ButtonBuilder>",
+          "summary": "Panel tab bar. The active tab renders as a disabled Primary button; the rest\nare Secondary buttons with customId `<prefix>:<tab.id>`."
+        },
+        {
+          "name": "thumbRow",
+          "kind": "function",
+          "signature": "function thumbRow(lines: string | string[], imageUrl: string): SectionBuilder",
+          "summary": "Up to three text lines with a thumbnail accessory."
+        }
+      ]
+    },
+    {
+      "importPath": "lumi/utils",
+      "file": "packages/core/src/lib/addon-sandbox/sdk/utils.ts",
+      "exports": [
+        {
+          "name": "errorFrom",
+          "kind": "function",
+          "signature": "function errorFrom(err: unknown): Error",
+          "summary": ""
+        },
+        {
+          "name": "formatDuration",
+          "kind": "function",
+          "signature": "function formatDuration(ms: number): string",
+          "summary": ""
+        },
+        {
+          "name": "parseDuration",
+          "kind": "function",
+          "signature": "function parseDuration(str: string): number | null",
+          "summary": "Parse a duration string like \"10m\", \"2h30m\", \"7d\" into milliseconds. Returns null if unparseable."
+        },
+        {
+          "name": "relativeTimestamp",
+          "kind": "function",
+          "signature": "function relativeTimestamp(date?: Date | number): string",
+          "summary": "Discord relative timestamp markup: `<t:EPOCH:R>` → \"2 hours ago\"."
+        },
+        {
+          "name": "shortTimestamp",
+          "kind": "function",
+          "signature": "function shortTimestamp(date?: Date | number): string",
+          "summary": "Discord short-time timestamp markup: `<t:EPOCH:t>` → \"14:30\"."
+        },
+        {
+          "name": "swallow",
+          "kind": "function",
+          "signature": "function swallow(reason: string): (err: unknown) => null",
+          "summary": "Drop-in replacement for `.catch(() => null)` that emits a debug-level log\nso unexpected failures are visible without crashing the caller.\n\nUsage: `somePromise.catch(swallow(\"Context: operation failed\"))`"
+        }
+      ]
+    }
+  ],
+  "sdkExportCount": 84
+}

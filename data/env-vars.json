@@ -1,0 +1,514 @@
+{
+  "workerEnvVars": [
+    {
+      "name": "BOT_TOKEN",
+      "required": "yes",
+      "fallback": "—",
+      "about": "Discord bot token. The worker refuses to start without it."
+    },
+    {
+      "name": "TOTAL_SHARDS",
+      "required": "no",
+      "fallback": "auto",
+      "about": "Shard count for the ShardingManager, or auto to let Discord decide."
+    },
+    {
+      "name": "SHARD_LIST",
+      "required": "no",
+      "fallback": "auto",
+      "about": "Comma-separated shard ids this deployment owns, or auto."
+    },
+    {
+      "name": "POSTGRES_URL",
+      "required": "yes",
+      "fallback": "—",
+      "about": "Primary Postgres connection string (point it at PgBouncer in Compose)."
+    },
+    {
+      "name": "POSTGRES_REPLICA_URL",
+      "required": "no",
+      "fallback": "—",
+      "about": "Optional read-replica connection string."
+    },
+    {
+      "name": "POSTGRES_APP_NAME",
+      "required": "no",
+      "fallback": "lumi-worker-<shards>",
+      "about": "application_name reported to Postgres per process."
+    },
+    {
+      "name": "POSTGRES_POOL_MAX",
+      "required": "no",
+      "fallback": "derived",
+      "about": "Explicit per-process pool size. Wins over the budget below."
+    },
+    {
+      "name": "POSTGRES_POOL_TOTAL",
+      "required": "no",
+      "fallback": "80",
+      "about": "Fleet-wide connection budget, divided across shards so scaling out never exhausts max_connections."
+    },
+    {
+      "name": "DIRECT_POSTGRES_URL",
+      "required": "no",
+      "fallback": "—",
+      "about": "Direct Postgres URL used by migrations, bypassing PgBouncer."
+    },
+    {
+      "name": "REDIS_HOST",
+      "required": "no",
+      "fallback": "127.0.0.1",
+      "about": "Standalone/sentinel Redis host."
+    },
+    {
+      "name": "REDIS_PORT",
+      "required": "no",
+      "fallback": "6379",
+      "about": "Standalone/sentinel Redis port."
+    },
+    {
+      "name": "REDIS_PASSWORD",
+      "required": "no",
+      "fallback": "—",
+      "about": "Redis password."
+    },
+    {
+      "name": "REDIS_CACHE_DB",
+      "required": "no",
+      "fallback": "—",
+      "about": "Logical database index for cache data."
+    },
+    {
+      "name": "REDIS_TASK_DB",
+      "required": "no",
+      "fallback": "—",
+      "about": "Logical database index for scheduled-task data."
+    },
+    {
+      "name": "REDIS_SENTINELS",
+      "required": "no",
+      "fallback": "—",
+      "about": "Sentinel addresses when running Redis in sentinel mode."
+    },
+    {
+      "name": "REDIS_SENTINEL_NAME",
+      "required": "no",
+      "fallback": "—",
+      "about": "Sentinel master name."
+    },
+    {
+      "name": "REDIS_SENTINEL_PASSWORD",
+      "required": "no",
+      "fallback": "—",
+      "about": "Sentinel password."
+    },
+    {
+      "name": "REDIS_CLUSTER_NODES",
+      "required": "no",
+      "fallback": "—",
+      "about": "Comma-separated host:port list enabling cluster mode."
+    },
+    {
+      "name": "REDIS_CLUSTER_SCALE_READS",
+      "required": "no",
+      "fallback": "master",
+      "about": "Read scaling policy: master, slave, or all."
+    },
+    {
+      "name": "REDIS_CLUSTER_SLOTS_REFRESH_TIMEOUT_MS",
+      "required": "no",
+      "fallback": "2000",
+      "about": "Slot-refresh timeout for the cluster client."
+    },
+    {
+      "name": "RPC_HTTP_HOST",
+      "required": "no",
+      "fallback": "127.0.0.1",
+      "about": "Bind for the worker RPC/metrics surface. Widened to 0.0.0.0 only on the container the dashboard calls."
+    },
+    {
+      "name": "RPC_HTTP_PORT",
+      "required": "no",
+      "fallback": "8091",
+      "about": "Port for the worker RPC/metrics surface."
+    },
+    {
+      "name": "RPC_INTERNAL_TOKEN",
+      "required": "yes",
+      "fallback": "—",
+      "about": "Shared secret authenticating dashboard-to-worker RPC. Unset is a hard failure."
+    },
+    {
+      "name": "RPC_HTTP_URL",
+      "required": "no",
+      "fallback": "—",
+      "about": "Base URL of the api RPC server, read only by `lumi doctor` to check reachability."
+    },
+    {
+      "name": "RPC_DISCORD_BULKHEAD_SIZE",
+      "required": "no",
+      "fallback": "16",
+      "about": "Max concurrent guild-manager RPC actions (each makes a Discord REST permission check), so a Discord stall can't starve DB-only actions."
+    },
+    {
+      "name": "RPC_DISCORD_BULKHEAD_QUEUE_LIMIT",
+      "required": "no",
+      "fallback": "64",
+      "about": "Guild-manager RPC calls allowed to wait for a bulkhead slot before new ones fail with a retryable error."
+    },
+    {
+      "name": "OWNER_IDS",
+      "required": "no",
+      "fallback": "—",
+      "about": "Extra bot-owner ids recognized by the permit resolver (the Discord application owner is always an owner)."
+    },
+    {
+      "name": "LUMI_CONSUMER_ID",
+      "required": "no",
+      "fallback": "hostname / pid",
+      "about": "Stable consumer identity for stream processing."
+    },
+    {
+      "name": "CLUSTER_NAME",
+      "required": "no",
+      "fallback": "default",
+      "about": "Namespaces shard telemetry per replica for the fleet view."
+    },
+    {
+      "name": "LUMI_DEV_PATHS",
+      "required": "no",
+      "fallback": "—",
+      "about": "Colon/comma-separated extra module directories for local add-on development. Never set in production."
+    },
+    {
+      "name": "DISCORD_PROXY_URL",
+      "required": "no",
+      "fallback": "—",
+      "about": "Shared outbound REST proxy root (nirn-proxy). Unset means direct Discord API calls."
+    },
+    {
+      "name": "DASHBOARD_PUBLIC_URL",
+      "required": "no",
+      "fallback": "—",
+      "about": "Public dashboard origin used to build appeal links. Unset skips appeal links."
+    },
+    {
+      "name": "NODE_ENV",
+      "required": "no",
+      "fallback": "development",
+      "about": "Runtime environment flag."
+    },
+    {
+      "name": "SHARD_COUNT",
+      "required": "no",
+      "fallback": "1",
+      "about": "Injected by the ShardingManager; do not set yourself."
+    },
+    {
+      "name": "SHARDS",
+      "required": "no",
+      "fallback": "—",
+      "about": "Injected by the ShardingManager as this process's shard id list; do not set yourself."
+    },
+    {
+      "name": "SHARDING_MANAGER",
+      "required": "no",
+      "fallback": "—",
+      "about": "Injected by the ShardingManager to mark a child process; do not set yourself."
+    },
+    {
+      "name": "HOSTNAME",
+      "required": "no",
+      "fallback": "container hostname",
+      "about": "Used as a consumer-id fallback; normally set by the container runtime, not you."
+    },
+    {
+      "name": "CACHE_MESSAGE_LIMIT",
+      "required": "no",
+      "fallback": "50",
+      "about": "Max cached messages per channel."
+    },
+    {
+      "name": "CACHE_MEMBER_LIMIT",
+      "required": "no",
+      "fallback": "50",
+      "about": "Max cached guild members per guild."
+    },
+    {
+      "name": "CACHE_THREAD_LIMIT",
+      "required": "no",
+      "fallback": "25",
+      "about": "Max cached threads per channel."
+    },
+    {
+      "name": "CACHE_USER_LIMIT",
+      "required": "no",
+      "fallback": "200",
+      "about": "Max cached users."
+    },
+    {
+      "name": "SWEEPER_MESSAGES_INTERVAL",
+      "required": "no",
+      "fallback": "300",
+      "about": "Seconds between message-cache sweeps."
+    },
+    {
+      "name": "SWEEPER_MESSAGES_LIFETIME",
+      "required": "no",
+      "fallback": "600",
+      "about": "Seconds a cached message survives before being swept."
+    },
+    {
+      "name": "SWEEPER_MEMBERS_INTERVAL",
+      "required": "no",
+      "fallback": "1800",
+      "about": "Seconds between guild-member-cache sweeps."
+    },
+    {
+      "name": "SWEEPER_MEMBERS_LIFETIME",
+      "required": "no",
+      "fallback": "1800",
+      "about": "Seconds a cached non-self member survives before being swept."
+    },
+    {
+      "name": "DEFAULT_PREFIX",
+      "required": "no",
+      "fallback": ",",
+      "about": "Legacy text-command prefix."
+    },
+    {
+      "name": "SERVICE_NAME",
+      "required": "no",
+      "fallback": "lumi",
+      "about": "Service name reported to the logger and observability exporters."
+    },
+    {
+      "name": "DB_SLOW_QUERY_THRESHOLD_MS",
+      "required": "no",
+      "fallback": "1000",
+      "about": "Prisma queries slower than this log a warning and increment lumi_db_slow_queries_total."
+    },
+    {
+      "name": "ADDON_SIGNATURE_POLICY",
+      "required": "no",
+      "fallback": "off",
+      "about": "How strictly the Downloader enforces git SSH commit-signature verification before an addon repo/module revision goes live: off, warn, or require."
+    },
+    {
+      "name": "ADDON_ALLOWED_SIGNERS_FILE",
+      "required": "no",
+      "fallback": "—",
+      "about": "Path to a git allowed_signers file listing trusted addon signers. Required (and validated to exist) when ADDON_SIGNATURE_POLICY=require."
+    },
+    {
+      "name": "AUDIT_RETENTION_DAYS",
+      "required": "no",
+      "fallback": "90",
+      "about": "How long audit ledger entries survive before the retention sweep purges them."
+    },
+    {
+      "name": "CONFIG_HISTORY_RETENTION_DAYS",
+      "required": "no",
+      "fallback": "90",
+      "about": "How long module config history entries survive before the retention sweep purges them."
+    },
+    {
+      "name": "MODERATION_RETENTION_DAYS",
+      "required": "no",
+      "fallback": "0 (keep forever)",
+      "about": "How long a lifted case and its resolved appeal survive before the retention sweep purges them. 0 keeps moderation history forever; active cases and pending appeals are never purged regardless of this setting."
+    },
+    {
+      "name": "AUDIT_ARCHIVE_DIR",
+      "required": "no",
+      "fallback": "—",
+      "about": "Root directory the retention sweep writes a gzip-compressed JSONL archive to before deleting a batch, for any purged table (not just the audit ledger). Unset deletes with no backup."
+    },
+    {
+      "name": "GDPR_EXPORT_DIR",
+      "required": "no",
+      "fallback": "data/gdpr-exports",
+      "about": "Root directory the async gdpr-export scheduled task writes a user's gzipped JSON export to."
+    },
+    {
+      "name": "GDPR_EXPORT_TTL_HOURS",
+      "required": "no",
+      "fallback": "24",
+      "about": "How long a finished GDPR export's file and job row survive before the hourly cleanup sweep removes them."
+    },
+    {
+      "name": "GDPR_EXPORT_SIGNING_SECRET",
+      "required": "no",
+      "fallback": "derived from RPC_INTERNAL_TOKEN",
+      "about": "HMAC key signing the short-lived GDPR export download token served by GET /gdpr-export. Falls back to RPC_INTERNAL_TOKEN when unset."
+    }
+  ],
+  "dashboardEnvVars": [
+    {
+      "name": "DASHBOARD_HOST",
+      "required": "no",
+      "fallback": "0.0.0.0",
+      "about": "Interface the dashboard binds."
+    },
+    {
+      "name": "DASHBOARD_PORT",
+      "required": "no",
+      "fallback": "8080",
+      "about": "Port the dashboard listens on."
+    },
+    {
+      "name": "DASHBOARD_PUBLIC_URL",
+      "required": "no",
+      "fallback": "\"\"",
+      "about": "Public origin of the dashboard (e.g. https://dash.example.com) for post-invite OAuth2 redirects."
+    },
+    {
+      "name": "DASHBOARD_SESSION_SECRET",
+      "required": "yes",
+      "fallback": "—",
+      "about": "NextAuth session JWT encryption secret."
+    },
+    {
+      "name": "DISCORD_OAUTH2_CLIENT_ID",
+      "required": "yes",
+      "fallback": "—",
+      "about": "Discord application client id."
+    },
+    {
+      "name": "DISCORD_OAUTH2_CLIENT_SECRET",
+      "required": "yes",
+      "fallback": "—",
+      "about": "Discord application client secret."
+    },
+    {
+      "name": "RPC_HTTP_URL",
+      "required": "yes",
+      "fallback": "—",
+      "about": "Base URL of the worker RPC server, e.g. http://worker:8091."
+    },
+    {
+      "name": "RPC_INTERNAL_TOKEN",
+      "required": "no",
+      "fallback": "\"\"",
+      "about": "Shared secret sent as the RPC bearer token. Must match the worker's value; optional only so a local dev worker without the token still works."
+    },
+    {
+      "name": "TRUSTED_PROXY_HOPS",
+      "required": "no",
+      "fallback": "1",
+      "about": "Number of trusted reverse-proxy hops when reading the client IP."
+    },
+    {
+      "name": "CLIENT_IP_HEADER",
+      "required": "no",
+      "fallback": "—",
+      "about": "Header to trust for the client IP behind a reverse proxy."
+    },
+    {
+      "name": "AUTH_URL",
+      "required": "proxy only",
+      "fallback": "—",
+      "about": "Externally visible origin when a reverse proxy rewrites Host."
+    },
+    {
+      "name": "NEXT_PHASE",
+      "required": "no",
+      "fallback": "—",
+      "about": "Set by Next.js itself during `next build`; not something you set."
+    },
+    {
+      "name": "NODE_ENV",
+      "required": "no",
+      "fallback": "development",
+      "about": "Runtime environment flag."
+    }
+  ],
+  "observabilityEnvVars": [
+    {
+      "name": "OTEL_ENABLED",
+      "required": "no",
+      "fallback": "true",
+      "about": "Enable OpenTelemetry tracing."
+    },
+    {
+      "name": "OTEL_EXPORTER_OTLP_ENDPOINT",
+      "required": "no",
+      "fallback": "collector:4318",
+      "about": "OTLP endpoint traces are exported to."
+    },
+    {
+      "name": "OTEL_TRACES_SAMPLE_RATIO",
+      "required": "no",
+      "fallback": "1",
+      "about": "Trace sampling ratio."
+    },
+    {
+      "name": "OTEL_DIAG",
+      "required": "no",
+      "fallback": "—",
+      "about": "OpenTelemetry diagnostics flag."
+    },
+    {
+      "name": "METRICS_ENABLED",
+      "required": "no",
+      "fallback": "true",
+      "about": "Serve /healthz, /readyz, and /metrics."
+    },
+    {
+      "name": "METRICS_HOST",
+      "required": "no",
+      "fallback": "—",
+      "about": "Bind for the telemetry server."
+    },
+    {
+      "name": "METRICS_PORT",
+      "required": "no",
+      "fallback": "9090",
+      "about": "Port for the telemetry server."
+    },
+    {
+      "name": "LOG_FORMAT",
+      "required": "no",
+      "fallback": "json",
+      "about": "Log encoding: json in Compose, pretty in the dev container."
+    },
+    {
+      "name": "LOG_LEVEL",
+      "required": "no",
+      "fallback": "info",
+      "about": "Minimum log level."
+    }
+  ],
+  "composeEnvVars": [
+    {
+      "name": "POSTGRES_USER",
+      "required": "no",
+      "fallback": "lumi",
+      "about": "Postgres superuser name created at init."
+    },
+    {
+      "name": "POSTGRES_PASSWORD",
+      "required": "no",
+      "fallback": "lumi",
+      "about": "Postgres password. Change it in any shared deployment."
+    },
+    {
+      "name": "GRAFANA_USER",
+      "required": "no",
+      "fallback": "admin",
+      "about": "Grafana admin username (observability profile)."
+    },
+    {
+      "name": "GRAFANA_PASSWORD",
+      "required": "yes*",
+      "fallback": "—",
+      "about": "*Required only under the observability profile. No default on purpose."
+    },
+    {
+      "name": "NIRN_LOG_LEVEL",
+      "required": "no",
+      "fallback": "info",
+      "about": "Log level for the nirn outbound proxy (scale profile)."
+    }
+  ]
+}

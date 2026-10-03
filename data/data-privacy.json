@@ -1,0 +1,62 @@
+[
+  {
+    "name": "afk",
+    "displayName": "AFK",
+    "statement": "Stores user ID, optional AFK reason message, and timestamps to notify others when mentioned. Cleared automatically upon return or on GDPR erasure."
+  },
+  {
+    "name": "core",
+    "displayName": "Core",
+    "statement": "Stores user IDs in permit assignments, system blocklists, and audit logs. Handled centrally during GDPR erasure."
+  },
+  {
+    "name": "dashboard",
+    "displayName": "Dashboard",
+    "statement": null
+  },
+  {
+    "name": "economy",
+    "displayName": "Economy",
+    "statement": "Stores user ID with wallet and bank balances, payday timestamps, and a transaction history per server. Deleted on GDPR erasure."
+  },
+  {
+    "name": "filter",
+    "displayName": "Filter",
+    "statement": null
+  },
+  {
+    "name": "logging",
+    "displayName": "Logging",
+    "statement": null
+  },
+  {
+    "name": "mod",
+    "displayName": "Moderation",
+    "statement": "Stores user IDs in moderation case records, warnings, active punishments, and staff notes. Target user IDs are anonymized upon GDPR erasure while preserving audit integrity; staff notes about the user are deleted."
+  },
+  {
+    "name": "reactionroles",
+    "displayName": "Reaction Roles",
+    "statement": "Stores role-menu definitions (titles, role IDs, gates) per server. Role assignments themselves live on Discord and are removed by unassigning the role."
+  },
+  {
+    "name": "security",
+    "displayName": "Security",
+    "statement": null
+  },
+  {
+    "name": "tempvc",
+    "displayName": "Temp Voice Channels",
+    "statement": "Stores owner user ID on active temporary voice channel records. Deleted automatically when channel is empty or upon GDPR erasure."
+  },
+  {
+    "name": "utility",
+    "displayName": "Utility",
+    "statement": null
+  },
+  {
+    "name": "welcome",
+    "displayName": "Welcome",
+    "statement": "No persistent user data. Join and leave events are rendered into cards at delivery time and are not stored."
+  }
+]

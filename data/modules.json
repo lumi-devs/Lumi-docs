@@ -1,0 +1,122 @@
+[
+  {
+    "name": "afk",
+    "displayName": "AFK",
+    "emoji": "💤",
+    "description": "Set yourself AFK; mentions notify others and a prefix is added to your nickname.",
+    "short": "Set yourself AFK with automated status and mention alerts.",
+    "category": "Community",
+    "disableable": true,
+    "configFieldCount": 1
+  },
+  {
+    "name": "core",
+    "displayName": "Core",
+    "emoji": "🛡️",
+    "description": "The built-in core module.",
+    "short": "Essential bot commands, module management, and administrative panels.",
+    "category": "System",
+    "disableable": false,
+    "configFieldCount": 0
+  },
+  {
+    "name": "dashboard",
+    "displayName": "Dashboard",
+    "emoji": "🖥️",
+    "description": "Integrates the bot with the Lumi Web Dashboard. Provides RPC endpoints for management.",
+    "short": "Web dashboard integration and RPC management endpoints.",
+    "category": "System",
+    "disableable": true,
+    "configFieldCount": 0
+  },
+  {
+    "name": "economy",
+    "displayName": "Economy",
+    "emoji": "🪙",
+    "description": "Guild bank with wallet and vault balances, payday, taxed transfers, slots, and a fully audited transaction ledger.",
+    "short": "Guild currency with payday, transfers, slots, and an audit ledger.",
+    "category": "Community",
+    "disableable": true,
+    "configFieldCount": 13
+  },
+  {
+    "name": "filter",
+    "displayName": "Filter",
+    "emoji": "🚫",
+    "description": "Automod rule engine: filtered terms (Aho-Corasick), regex rules, invite/link blocking with allowlists, mention-spam and caps limits, with configurable punishment and logging.",
+    "short": "Automod rule engine with regex patterns, invite blocking, and heat scoring.",
+    "category": "Moderation",
+    "disableable": true,
+    "configFieldCount": 40
+  },
+  {
+    "name": "logging",
+    "displayName": "Logging",
+    "emoji": "📋",
+    "description": "Server event logs: message deletes/edits, joins, leaves, bans, unbans, nickname and role changes.",
+    "short": "Server event logging for moderation, messages, and member actions.",
+    "category": "System",
+    "disableable": true,
+    "configFieldCount": 20
+  },
+  {
+    "name": "mod",
+    "displayName": "Moderation",
+    "emoji": "🛡️",
+    "description": "Staff moderation: warn, mute, kick, ban - with case logging.",
+    "short": "Staff moderation tools: warn, mute, kick, ban, and case tracking.",
+    "category": "Moderation",
+    "disableable": true,
+    "configFieldCount": 7
+  },
+  {
+    "name": "reactionroles",
+    "displayName": "Reaction Roles",
+    "emoji": "🎭",
+    "description": "Self-serve role menus with buttons, a multi-pick dropdown, or raw message reactions, including exclusive and gated options.",
+    "short": "Self-serve role menus via buttons, dropdown, or reactions.",
+    "category": "Community",
+    "disableable": true,
+    "configFieldCount": 1
+  },
+  {
+    "name": "security",
+    "displayName": "Security",
+    "emoji": "🛡️",
+    "description": "Server protection: anti-nuke detection with automatic quarantine.",
+    "short": "Server protection: anti-nuke thresholds, raid detection, and verification.",
+    "category": "Security",
+    "disableable": true,
+    "configFieldCount": 47
+  },
+  {
+    "name": "tempvc",
+    "displayName": "Temp Voice Channels",
+    "emoji": "🔊",
+    "description": "On-demand temporary voice channels that delete themselves once empty, with an owner control panel.",
+    "short": "On-demand temporary voice channels that clean up when empty.",
+    "category": "System",
+    "disableable": true,
+    "configFieldCount": 7
+  },
+  {
+    "name": "utility",
+    "displayName": "Utility",
+    "emoji": "⚙️",
+    "description": "General utility commands.",
+    "short": "Helpful server tools, avatar lookups, and user info commands.",
+    "category": "Community",
+    "disableable": true,
+    "configFieldCount": 1
+  },
+  {
+    "name": "welcome",
+    "displayName": "Welcome",
+    "emoji": "👋",
+    "description": "Greets new members with a welcome card, posts goodbye cards on leave, assigns join roles, and optionally sends a DM greeting.",
+    "short": "Welcome cards, goodbye cards, join roles, and DM greetings.",
+    "category": "Community",
+    "disableable": true,
+    "configFieldCount": 15
+  }
+]
