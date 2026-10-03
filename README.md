@@ -1,48 +1,81 @@
-# Lumi-docs
+# Lumi Documentation
 
-The Next.js/fumadocs site that renders [Lumi](https://github.com/lumi-devs/Lumi)'s public
-documentation at https://lumi-devs.github.io/Lumi-docs.
+Official documentation for **[Lumi](https://github.com/lumi-devs/Lumi)** — a modular, self-hosted Discord bot built on Bun, TypeScript, `@sapphire/framework`, and discord.js v14.
 
-**Content lives in [lumi-devs/Lumi](https://github.com/lumi-devs/Lumi)'s `docs/site/`, not
-here.** This repo is only the site tooling (Next config, fumadocs wiring, the components that
-render the generated reference tables). If you want to fix a typo, add a guide, or update a
-screenshot, open your PR against `docs/site/` in the main repo — PRs touching only this repo's
-`content/`, `data/`, or `public/synced/` directories will be rejected, because those directories
-are build inputs pulled from the main repo, not committed here (see `.gitignore`).
+🌐 **Live Site:** [https://lumi-devs.github.io/Lumi-docs](https://lumi-devs.github.io/Lumi-docs)
 
-## How the build works
+---
 
-1. [`lumi-devs/Lumi`](https://github.com/lumi-devs/Lumi) is checked out into `./lumi`.
-2. Its `scripts/docs/sync.sh` copies `docs/site/content` and `docs/site/public` into this
-   repo's `content/` and `public/synced/`, and runs `bun run docs:export` to write the
-   generated reference JSON (modules, commands, permits, RPC actions, env vars, data-privacy
-   statements, addon SDK reference) into `data/`.
-3. This repo's own `bun install` + `bun run build` (Next.js `output: "export"`) then produces
-   the static site in `dist/`.
+## 📖 Overview
 
-This mirrors [noctalia-dev](https://github.com/noctalia-dev)'s split between its main repo
-(`docs/` + `tools/sync-docs.sh`) and its separate docs site repo.
+This repository hosts the source code, content, and static assets for Lumi's documentation site, powered by [Next.js](https://nextjs.org/) and [Fumadocs](https://fumadocs.vercel.app/).
 
-## CI
+All end-user guides, developer reference sheets, API/RPC specs, and Add-on SDK manuals are maintained directly within this repository:
 
-`.github/workflows/deploy.yml` runs this pipeline and deploys to GitHub Pages on:
+- `content/docs/` — Hand-written documentation articles in MDX format
+- `content/docs/addons/` — Sandboxed Add-on SDK architecture, capabilities, and distribution guides
+- `content/docs/deploy/` — Self-hosting manuals: Docker Compose, systemd, Kubernetes, and scaling tiers
+- `content/docs/guides/` — In-depth domain guides for Moderation, Security, Reaction Roles, Economy, TempVC, etc.
+- `content/docs/reference/` — Command references, environment variables, permits, and architecture topology
+- `data/` — Static metadata snapshots (RPC definitions, permits, commands, and schemas)
 
-- push to `main` (this repo's own tooling changes),
-- `repository_dispatch` with type `lumi-docs-sync`, sent by the main repo's
-  `docs-sync.yml` whenever `docs/site/**`, `scripts/docs/**`, or the source the generators
-  read from changes,
-- a daily schedule, as a fallback for whenever the dispatch didn't fire (e.g. the main repo's
-  `DOCS_DISPATCH_TOKEN` secret isn't set),
-- `workflow_dispatch`, for a manual rebuild.
+---
 
-## Local development
+## 🛠️ Local Development
 
-```sh
-../Lumi/scripts/docs/sync.sh .   # from a sibling checkout of lumi-devs/Lumi
-bun install
-BASE_PATH= bun run dev
-```
+### Prerequisites
 
-## License
+- [Bun](https://bun.sh) (v1.2+)
+- Node.js 22+ (optional, for Next.js fallback compatibility)
 
-GPL-3.0-only, matching [lumi-devs/Lumi](https://github.com/lumi-devs/Lumi). See `LICENSE`.
+### Quickstart
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/lumi-devs/Lumi-docs.git
+   cd Lumi-docs
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   bun install
+   ```
+
+3. **Start the local development server:**
+   ```bash
+   bun run dev
+   ```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to preview the site.
+
+4. **Production Build:**
+   ```bash
+   bun run build
+   ```
+
+---
+
+## 🚀 Deployment & CI
+
+Automated deployments are driven by GitHub Actions in `.github/workflows/deploy.yml`:
+
+- **Push to `main`:** Automatically builds static artifacts (`output: "export"`) and deploys to **GitHub Pages**.
+- **Scheduled Sync:** Nightly sanity builds ensure zero dead external references or stale contract typings.
+- **Manual Trigger (`workflow_dispatch`):** Run on-demand for immediate documentation updates.
+
+---
+
+## 🤝 Contributing
+
+Contributions to improve guides, fix typos, or add new integration workflows are warmly welcome!
+
+1. Fork this repository.
+2. Create a feature branch: `git checkout -b docs/my-guide`.
+3. Commit your changes: `git commit -m "docs: add guide on XYZ"`.
+4. Push to your branch and open a Pull Request.
+
+---
+
+## 📄 License
+
+GPL-3.0-only © [Lumi Devs](https://github.com/lumi-devs). See [LICENSE](LICENSE) for details.
