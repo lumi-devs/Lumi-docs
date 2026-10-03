@@ -1,34 +1,30 @@
-# Lumi Documentation
+# Lumi Docs
 
-Official documentation for **[Lumi](https://github.com/lumi-devs/Lumi)** — a modular, self-hosted Discord bot built on Bun, TypeScript, `@sapphire/framework`, and discord.js v14.
+Official documentation and guides for **[Lumi](https://github.com/lumi-devs/Lumi)**, the modular, self-hosted Discord bot platform.
 
-🌐 **Live Site:** [https://lumi-devs.github.io/Lumi-docs](https://lumi-devs.github.io/Lumi-docs)
-
----
-
-## 📖 Overview
-
-This repository hosts the source code, content, and static assets for Lumi's documentation site, powered by [Next.js](https://nextjs.org/) and [Fumadocs](https://fumadocs.vercel.app/).
-
-All end-user guides, developer reference sheets, API/RPC specs, and Add-on SDK manuals are maintained directly within this repository:
-
-- `content/docs/` — Hand-written documentation articles in MDX format
-- `content/docs/addons/` — Sandboxed Add-on SDK architecture, capabilities, and distribution guides
-- `content/docs/deploy/` — Self-hosting manuals: Docker Compose, systemd, Kubernetes, and scaling tiers
-- `content/docs/guides/` — In-depth domain guides for Moderation, Security, Reaction Roles, Economy, TempVC, etc.
-- `content/docs/reference/` — Command references, environment variables, permits, and architecture topology
-- `data/` — Static metadata snapshots (RPC definitions, permits, commands, and schemas)
+🌐 **Live Website:** [https://lumi-devs.github.io/Lumi-docs](https://lumi-devs.github.io/Lumi-docs)
 
 ---
 
-## 🛠️ Local Development
+## Overview
+
+This repository powers the public documentation website built on [Next.js](https://nextjs.org/) and [Fumadocs](https://fumadocs.vercel.app/). All end-user guides, architecture specifications, API references, and self-hosting documentation live directly here.
+
+- `content/getting-started/` — Prerequisites, quickstart, installation, and environment variables.
+- `content/guides/` — In-depth guides for moderation, security, reaction roles, economy, and automod.
+- `content/addons/` — SDK documentation for creating and running sandboxed custom addons.
+- `content/deploy/` — Production deployment recipes for Docker Compose, systemd, and Kubernetes.
+- `content/reference/` — Command catalogs, permission nodes, architecture overviews, and RPC actions.
+
+---
+
+## Local Development
 
 ### Prerequisites
 
 - [Bun](https://bun.sh) (v1.2+)
-- Node.js 22+ (optional, for Next.js fallback compatibility)
 
-### Quickstart
+### Running Locally
 
 1. **Clone the repository:**
    ```bash
@@ -41,41 +37,35 @@ All end-user guides, developer reference sheets, API/RPC specs, and Add-on SDK m
    bun install
    ```
 
-3. **Start the local development server:**
+3. **Start the dev server:**
    ```bash
    bun run dev
    ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to preview the site.
-
-4. **Production Build:**
-   ```bash
-   bun run build
-   ```
+   Open [http://localhost:3001](http://localhost:3001) to view the documentation.
 
 ---
 
-## 🚀 Deployment & CI
+## Building & Verification
 
-Automated deployments are driven by GitHub Actions in `.github/workflows/deploy.yml`:
+```bash
+# Typecheck
+bun run typecheck
 
-- **Push to `main`:** Automatically builds static artifacts (`output: "export"`) and deploys to **GitHub Pages**.
-- **Scheduled Sync:** Nightly sanity builds ensure zero dead external references or stale contract typings.
-- **Manual Trigger (`workflow_dispatch`):** Run on-demand for immediate documentation updates.
+# Lint check
+bun run lint
 
----
-
-## 🤝 Contributing
-
-Contributions to improve guides, fix typos, or add new integration workflows are warmly welcome!
-
-1. Fork this repository.
-2. Create a feature branch: `git checkout -b docs/my-guide`.
-3. Commit your changes: `git commit -m "docs: add guide on XYZ"`.
-4. Push to your branch and open a Pull Request.
+# Static HTML production export
+bun run build
+```
 
 ---
 
-## 📄 License
+## Automated Deployment
 
-GPL-3.0-only © [Lumi Devs](https://github.com/lumi-devs). See [LICENSE](LICENSE) for details.
+Commits merged into `main` automatically build and deploy to GitHub Pages via `.github/workflows/deploy.yml`.
+
+---
+
+## License
+
+GNU Affero General Public License v3.0 (AGPL-3.0). See [LICENSE](LICENSE) for details.
